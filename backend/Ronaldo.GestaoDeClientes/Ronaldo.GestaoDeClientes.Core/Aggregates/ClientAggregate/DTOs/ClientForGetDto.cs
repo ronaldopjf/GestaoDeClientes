@@ -1,10 +1,10 @@
-﻿using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Entities;
-using Ronaldo.GestaoDeClientes.Core.SharedKernel.Entities;
+﻿using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Entities;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Entities;
 using System;
 
-namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Entities
+namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
 {
-    public class Client : Entity
+    public class ClientForGetDto
     {
         public string Name { get; set; }
         public int SocialSecurityNumber { get; set; }

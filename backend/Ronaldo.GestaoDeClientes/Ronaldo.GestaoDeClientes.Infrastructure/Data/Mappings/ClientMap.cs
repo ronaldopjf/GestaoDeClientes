@@ -35,17 +35,25 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Mappings
                 .IsRequired()
                 .HasColumnName("DS_SEXO");
 
+            builder.Property(x => x.IdAddress)
+                .IsRequired()
+                .HasColumnName("ID_ENDERECO");
+
+            builder.Property(x => x.IdOccupation)
+                .IsRequired()
+                .HasColumnName("ID_CARGO");
+
             builder.Property(x => x.Active)
                 .HasDefaultValue(true)
                 .HasColumnName("FL_ATIVO");
 
             builder.HasOne(c => c.Address)
                 .WithMany(a => a.Clients)
-                .HasForeignKey(c => c.Address.Id);
+                .HasForeignKey(c => c.IdAddress);
 
             builder.HasOne(c => c.Occupation)
                 .WithMany(o => o.Clients)
-                .HasForeignKey(c => c.Occupation.Id);
+                .HasForeignKey(c => c.IdOccupation);
         }
     }
 }

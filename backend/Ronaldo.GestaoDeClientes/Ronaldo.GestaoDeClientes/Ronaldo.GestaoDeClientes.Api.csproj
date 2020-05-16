@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Configurations\" />
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Ronaldo.GestaoDeClientes.Cross-Cutting\Ronaldo.GestaoDeClientes.Cross-Cutting.csproj" />
   </ItemGroup>
 
