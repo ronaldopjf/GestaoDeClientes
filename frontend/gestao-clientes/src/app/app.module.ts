@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
+import { ClientModule } from './pages/client/client.module';
+import { OccupationModule } from './pages/occupation/occupation.module';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { AppComponent } from './app.component';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    // ClientModule,
+    OccupationModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

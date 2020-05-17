@@ -1,13 +1,27 @@
 .example-container {
   width: 100%;
   height: 100%;
+  background-color: beige;
 }
 
 .example-sidenav {
   padding: 20px;
+  background-color: cornflowerblue;
 }
 
 .example-sidenav-content {
   display: flex;
   height: 100%;
+}
+
+.list-item {
+  color: white;
+}
+
+.list-item-close {
+  color: red;
+}
+
+.span-row {
+  font-size: 12px;
 }
