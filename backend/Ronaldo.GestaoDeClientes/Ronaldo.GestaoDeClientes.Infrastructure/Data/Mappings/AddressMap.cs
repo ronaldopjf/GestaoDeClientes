@@ -32,7 +32,6 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Mappings
 
             builder.Property(x => x.Complement)
                 .HasMaxLength(50)
-                .IsRequired()
                 .HasColumnName("DS_COMPLEMENTO");
 
             builder.Property(x => x.Neighborhood)

@@ -2,23 +2,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { isNullOrUndefined } from 'util';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from '@angular/material/snack-bar';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
+import { ClientForList } from 'src/app/models/client/clientForList';
+import { ClientService } from 'src/app/services/client.service';
+import { ClientCreateUpdateComponent } from '../client-create-update/client-create-update.component';
+import { ClientForCreateUpdate } from 'src/app/models/client/clientForCreateUpdate';
 
 @Component({
   selector: 'app-client-list',
@@ -26,38 +21,63 @@ const NAMES: string[] = [
   styleUrls: ['./client-list.component.scss']
 })
 export class ClientListComponent implements OnInit {
-  // public clients: ClientForList[];
-  // public columnsToDisplay: string[] = [
-  //   'name',
-  //   'socialSecurityNumber',
-  //   'dateOfBirth',
-  //   'sex',
-  //   'address',
-  //   'occupation',
-  //   'active',
-  //   'actions'];
-
-
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
-
+  public clients: ClientForList[] = [];
+  private clientForCreateUpdate = new ClientForCreateUpdate();
+  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'address', 'occupation', 'active'];
+  public dataSource: MatTableDataSource<ClientForList>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  private horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  private verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(
+    private clientService: ClientService,
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
+  ) {
   }
 
   ngOnInit() {
+    this.dataSource = new MatTableDataSource<ClientForList>(this.clients);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.getClients();
   }
 
-  applyFilter(event: Event) {
+  private getClients(): void {
+    this.clientService.getClients().subscribe(next => {
+      this.dataSource.data = next;
+    }, () => {
+    });
+  }
+
+  public addClient(): void {
+    const dialogRef = this.dialog.open(ClientCreateUpdateComponent, {
+      width: '60%',
+      data: {
+        description: 'Cadastrar Cliente',
+        clientForCreateUpdate: this.clientForCreateUpdate
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!isNullOrUndefined(result)) {
+        this.createClient(result);
+      }
+    });
+  }
+
+  private createClient(clientForRegister: ClientForCreateUpdate) {
+    this.clientService.createClient(clientForRegister).subscribe(next => {
+      this.openSnackBar('Ação com sucesso', 'Cadastrar');
+      this.clientForCreateUpdate = new ClientForCreateUpdate();
+      this.getClients();
+    }, () => {
+      this.openSnackBar('Ação falhou', 'Cadastrar');
+    });
+  }
+
+  public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -65,17 +85,12 @@ export class ClientListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
+  public openSnackBar(message: string, action: string): void {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition
+    });
+  }
 }

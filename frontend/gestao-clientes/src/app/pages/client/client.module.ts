@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { DemoMaterialModule } from '../../../shared/material-module';
 
 import { ClientRoutingModule } from './client.routing';
 import { ClientListComponent } from './client-list/client-list.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { ClientCreateUpdateComponent } from './client-create-update/client-create-update.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-
-
+import { ClientService } from 'src/app/services/client.service';
+import { OccupationService } from 'src/app/services/occupation.service';
 
 @NgModule({
   declarations: [
@@ -22,13 +18,13 @@ import { MatInputModule } from '@angular/material/input';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule,
-    MatTableModule,
-    // MatMenuModule,
-    // MatIconModule,
-    // MatFormFieldModule,
-    MatInputModule,
-    MatPaginatorModule
+    FormsModule,
+    DemoMaterialModule,
+    ClientRoutingModule
+  ],
+  providers: [
+    ClientService,
+    OccupationService
   ]
 })
 export class ClientModule { }

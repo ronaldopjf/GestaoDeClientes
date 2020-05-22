@@ -1,1 +1,97 @@
-<p>client-create-update works!</p>
+<h1 mat-dialog-title>{{ data.description }}</h1>
+
+<div mat-dialog-content>
+
+    <mat-label class="mat-label">Dados Pessoais:</mat-label>
+    <mat-form-field color="accent">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.name" name="name" required maxlength="100"
+            placeholder="Nome" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>CPF</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.socialSecurityNumber" name="socialSecurityNumber"
+            required maxlength="11" placeholder="CPF" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Cargo</mat-label>
+        <mat-select [(ngModel)]="data.clientForCreateUpdate.idOccupation" name="idOccupation" required>
+            <mat-option *ngFor="let occupation of occupations" [value]="occupation.id">
+                {{ occupation.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Data de Nascimento</mat-label>
+        <input matInput [matDatepicker]="dataNascimento" [(ngModel)]="data.clientForCreateUpdate.dateOfBirth"
+            name="dateOfBirth" required placeholder="Data de Nascimento" />
+        <mat-datepicker-toggle matSuffix [for]="dataNascimento"></mat-datepicker-toggle>
+        <mat-datepicker #dataNascimento></mat-datepicker>
+    </mat-form-field>
+
+    <mat-label id="radio-group-label">Selecione o Sexo: </mat-label>
+    <mat-radio-group aria-labelledby="radio-group-label" class="example-radio-group"
+        [(ngModel)]="data.clientForCreateUpdate.sex" required>
+        <mat-radio-button class="example-radio-button" *ngFor="let sex of genders" [value]="sex">
+            {{ sex }}
+        </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-label class="mat-label">Endereço:</mat-label>
+    <mat-form-field color="accent">
+        <mat-label>CEP</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.postalCode" name="postalCode" type="number"
+            required maxlength="8" placeholder="CEP" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Tipo do Logradouro</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.typeOfAddress" name="typeOfAddress" required
+            maxlength="12" placeholder="Tipo do Logradouro" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Nome do Logradouro</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.streetName" name="streetName" required
+            maxlength="100" placeholder="Nome do Logradouro" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Número</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.number" name="number" type="number" required
+            placeholder="Número" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Complemento</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.complement" name="complement" maxlength="50"
+            placeholder="Complemento" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Bairro</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.neighborhood" name="neighborhood" required
+            maxlength="50" placeholder="Bairro" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Cidade</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.city" name="city" required maxlength="50"
+            placeholder="Cidade" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Estado</mat-label>
+        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.state" name="state" required maxlength="50"
+            placeholder="Estado" />
+    </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-stroked-button (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.clientForCreateUpdate">Salvar</button>
+</div>

@@ -5,7 +5,7 @@ namespace Ronaldo.GestaoDeClientes.Core.SharedKernel.Interfaces.Repositories
 {
     public interface IRepository<T> where T : Entity
     {
-        ICollection<T> GetAll();
+        IEnumerable<T> GetAll();
         T GetById(int id);
         T Create(T entity);
         T Update(T entity);

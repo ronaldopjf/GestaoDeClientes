@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Ronaldo.GestaoDeClientes.Api.Configurations;
 using Ronaldo.GestaoDeClientes.Cross_Cutting.Injector;
 
 namespace Ronaldo.GestaoDeClientes.Api
@@ -22,7 +24,11 @@ namespace Ronaldo.GestaoDeClientes.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
             services.RegisterServices(Configuration);
+            services.AddMvc()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.RegisterMappings();
             services.AddAutoMapper(typeof(Startup));
         }
 
@@ -35,6 +41,8 @@ namespace Ronaldo.GestaoDeClientes.Api
             }
 
             app.UseRouting();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

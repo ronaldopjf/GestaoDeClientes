@@ -15,7 +15,7 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Repositories
             DbContext = dbContext;
         }
 
-        public ICollection<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return DbContext.Set<T>().ToList();
         }

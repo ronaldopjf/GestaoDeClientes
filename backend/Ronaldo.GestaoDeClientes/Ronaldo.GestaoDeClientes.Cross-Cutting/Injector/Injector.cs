@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Interfaces.Repositories;
 using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Interfaces.Services;
 using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Interfaces.Repositories;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Interfaces.Services;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Services;
 using Ronaldo.GestaoDeClientes.Core.SharedKernel.UnityOfWork;
 using Ronaldo.GestaoDeClientes.Infrastructure.Data;
 using Ronaldo.GestaoDeClientes.Infrastructure.Data.Repositories;
@@ -26,9 +29,13 @@ namespace Ronaldo.GestaoDeClientes.Cross_Cutting.Injector
 
             // Services
             services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IOccupationService, OccupationService>();
+            services.AddScoped<IAddressService, AddressService>();
 
             // Repositories
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IOccupationRepository, OccupationRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
 
             // Validators
 

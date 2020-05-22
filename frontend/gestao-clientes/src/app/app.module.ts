@@ -2,11 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { DemoMaterialModule } from 'src/shared/material-module';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -19,15 +15,11 @@ import { OccupationModule } from './pages/occupation/occupation.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    MatIconModule,
-    // ClientModule,
+    AppRoutingModule,
+    DemoMaterialModule,
+    ClientModule,
     OccupationModule
   ],
   bootstrap: [AppComponent]

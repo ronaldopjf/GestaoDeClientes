@@ -1,5 +1,7 @@
 ﻿using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs;
 using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Entities;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.DTOs;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Entities;
 
 namespace Ronaldo.GestaoDeClientes.Core.AutoMappers
 {
@@ -8,6 +10,8 @@ namespace Ronaldo.GestaoDeClientes.Core.AutoMappers
         public DomainToDtoMapping()
         {
             CreateMap<Client, ClientForGetDto>().ReverseMap();
+            CreateMap<Client, ClientForCreateDto>().ReverseMap();
+            CreateMap<Occupation, OccupationForGetDto>().ReverseMap();
         }
     }
 }
