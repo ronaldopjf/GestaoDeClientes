@@ -67,6 +67,23 @@ namespace Ronaldo.GestaoDeClientes.Api.Controllers
             return StatusCode(500);
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute]int id)
+        {
+            var result = _clientService.Delete(id);
+            if (result.Success)
+            {
+                return Ok(result.Object);
+            }
+
+            if (!string.IsNullOrEmpty(result.Message))
+            {
+                return BadRequest(new { error = result.Message });
+            }
+
+            return StatusCode(500);
+        }
+
         [HttpPut("inactivate/{id}")]
         public IActionResult Inactivate([FromRoute]int id)
         {

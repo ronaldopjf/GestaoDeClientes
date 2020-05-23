@@ -23,7 +23,7 @@ import { ClientForCreateUpdate } from 'src/app/models/client/clientForCreateUpda
 export class ClientListComponent implements OnInit {
   public clients: ClientForList[] = [];
   private clientForCreateUpdate = new ClientForCreateUpdate();
-  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'address', 'occupation', 'active'];
+  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'address', 'occupation', 'active', 'actions'];
   public dataSource: MatTableDataSource<ClientForList>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -37,7 +37,7 @@ export class ClientListComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.dataSource = new MatTableDataSource<ClientForList>(this.clients);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -67,13 +67,31 @@ export class ClientListComponent implements OnInit {
     });
   }
 
-  private createClient(clientForRegister: ClientForCreateUpdate) {
+  private createClient(clientForRegister: ClientForCreateUpdate): void {
     this.clientService.createClient(clientForRegister).subscribe(next => {
       this.openSnackBar('Ação com sucesso', 'Cadastrar');
       this.clientForCreateUpdate = new ClientForCreateUpdate();
       this.getClients();
     }, () => {
       this.openSnackBar('Ação falhou', 'Cadastrar');
+    });
+  }
+
+  public editClient(client: ClientForList): void {
+    this.clientService.editClient(client).subscribe(next => {
+      this.openSnackBar('Ação com sucesso', 'Editar');
+      this.getClients();
+    }, () => {
+      this.openSnackBar('Ação falhou', 'Editar');
+    });
+  }
+
+  public deleteClient(client: ClientForList): void {
+    this.clientService.deleteClient(client).subscribe(next => {
+      this.openSnackBar('Ação com sucesso', 'Excluir');
+      this.getClients();
+    }, () => {
+      this.openSnackBar('Ação falhou', 'Excluir');
     });
   }
 

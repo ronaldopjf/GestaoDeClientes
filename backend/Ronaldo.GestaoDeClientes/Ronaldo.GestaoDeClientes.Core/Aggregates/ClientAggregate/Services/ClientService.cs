@@ -56,6 +56,16 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
             throw new System.NotImplementedException();
         }
 
+        public ResponseObject<bool> Delete(int id)
+        {
+            _clientRepository.Delete(id);
+            var commit = _unityOfWork.Commit();
+
+            return commit
+                ? new ResponseObject<bool>(true,null,true)
+                : new ResponseObject<bool>(false, null, false);
+        }
+
         public ResponseObject<bool> Activate(int id)
         {
             throw new System.NotImplementedException();
