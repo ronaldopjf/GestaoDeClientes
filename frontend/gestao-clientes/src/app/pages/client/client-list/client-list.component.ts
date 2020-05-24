@@ -10,6 +10,7 @@ import { ClientForList } from 'src/app/models/client/clientForList';
 import { ClientService } from 'src/app/services/client.service';
 import { ClientCreateUpdateComponent } from '../client-create-update/client-create-update.component';
 import { ClientForCreateUpdate } from 'src/app/models/client/clientForCreateUpdate';
+import { ConfirmDialogComponent } from 'src/shared/confirm/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-client-list',
@@ -28,8 +29,7 @@ export class ClientListComponent implements OnInit {
     private clientService: ClientService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
-  ) {
-  }
+  ) { }
 
   public ngOnInit(): void {
     this.dataSource = new MatTableDataSource<ClientForList>(this.clients);
@@ -111,8 +111,20 @@ export class ClientListComponent implements OnInit {
     this.clientForCreateUpdate.active = client.active;
   }
 
-  public deleteClient(client: ClientForList): void {
-    this.clientService.deleteClient(client).subscribe(next => {
+  public confirmDeletion(clientForDelete: ClientForList): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { title: 'Excluir Cliente', message: `Confirma a exclusão de ${clientForDelete.name}?` }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!isNullOrUndefined(result)) {
+        this.deleteClient(clientForDelete)
+      }
+    });
+  }
+
+  public deleteClient(clientForDelete: ClientForList): void {
+    this.clientService.deleteClient(clientForDelete).subscribe(next => {
       this.openSnackBar('Ação realizada com sucesso', 'Excluir Cliente');
       this.getClients();
     }, () => {

@@ -9,6 +9,7 @@ import { ClientDetailsComponent } from './client-details/client-details.componen
 import { ClientCreateUpdateComponent } from './client-create-update/client-create-update.component';
 import { ClientService } from 'src/app/services/client.service';
 import { OccupationService } from 'src/app/services/occupation.service';
+import { ConfirmDialogModule } from 'src/shared/confirm/confirm-dialog.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { OccupationService } from 'src/app/services/occupation.service';
     CommonModule,
     FormsModule,
     DemoMaterialModule,
+    ConfirmDialogModule,
     ClientRoutingModule
   ],
   providers: [

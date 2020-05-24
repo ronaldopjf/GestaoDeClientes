@@ -15,7 +15,7 @@ export class ClientCreateUpdateComponent implements OnInit {
   public genders: string[] = ['Feminino', 'Masculino', 'Outro'];
 
   constructor(
-    public dialogRef: MatDialogRef<ClientCreateUpdateComponent>,
+    private dialogRef: MatDialogRef<ClientCreateUpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private occupationService: OccupationService,
     private snackBar: MatSnackBar

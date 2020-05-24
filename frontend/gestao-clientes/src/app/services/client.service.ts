@@ -22,22 +22,22 @@ export class ClientService extends BaseService {
   }
 
   public createClient(clientForRegister: ClientForCreateUpdate): Observable<any> {
-    return this.post(`${this.clientUrl}`, clientForRegister);
+    return this.post(this.clientUrl, clientForRegister);
   }
 
   public editClient(clientForEdit: ClientForCreateUpdate): Observable<any> {
     return this.put(this.clientUrl, clientForEdit);
   }
 
-  public deleteClient(clientForList: ClientForList): Observable<any> {
-    return this.delete(this.clientUrl, `${clientForList.id}`);
+  public deleteClient(clientForDelete: ClientForList): Observable<any> {
+    return this.delete(this.clientUrl, `${clientForDelete.id}`);
   }
 
-  public activateClient(clientForList: ClientForList): Observable<any> {
-    return this.put(`${this.clientUrl}/activate/${clientForList.id}`, null);
+  public activateClient(clientForActivate: ClientForList): Observable<any> {
+    return this.put(`${this.clientUrl}/activate/${clientForActivate.id}`, null);
   }
 
-  public inactivateClient(clientForList: ClientForList): Observable<any> {
-    return this.put(`${this.clientUrl}/inactivate/${clientForList.id}`, null);
+  public inactivateClient(clientForInactivate: ClientForList): Observable<any> {
+    return this.put(`${this.clientUrl}/inactivate/${clientForInactivate.id}`, null);
   }
 }
