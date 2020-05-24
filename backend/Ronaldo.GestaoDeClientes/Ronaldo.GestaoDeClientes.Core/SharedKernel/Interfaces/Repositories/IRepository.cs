@@ -10,6 +10,6 @@ namespace Ronaldo.GestaoDeClientes.Core.SharedKernel.Interfaces.Repositories
         T Create(T entity);
         T Update(T entity);
         void Delete(int id);
-        void Inactivate(T entity);
+        void ChangeActive(T entity);
     }
 }

@@ -13,6 +13,6 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Entities
         public string City { get; set; }
         public string State { get; set; }
         public int PostalCode { get; set; }
-        public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
+        public virtual IEnumerable<Client> Clients { get; set; }
     }
 }

@@ -1,22 +1,18 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { OccupationService } from 'src/app/services/occupation.service';
 import { Occupation } from 'src/app/models/occupation/occupation';
+import { OccupationService } from 'src/app/services/occupation.service';
 
 @Component({
-  selector: 'app-client-create-update',
-  templateUrl: './client-create-update.component.html',
-  styleUrls: ['./client-create-update.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class ClientCreateUpdateComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   public occupations: Occupation[] = [];
-  public genders: string[] = ['Feminino', 'Masculino', 'Outro'];
 
   constructor(
-    public dialogRef: MatDialogRef<ClientCreateUpdateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
     private occupationService: OccupationService,
     private snackBar: MatSnackBar
   ) { }
@@ -39,9 +35,5 @@ export class ClientCreateUpdateComponent implements OnInit {
       horizontalPosition: 'right',
       verticalPosition: 'top'
     });
-  }
-
-  public onNoClick(): void {
-    this.dialogRef.close();
   }
 }

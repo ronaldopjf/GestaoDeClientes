@@ -47,7 +47,7 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Repositories
             DbContext.Set<T>().Remove(obj);
         }
 
-        public void Inactivate(T entity)
+        public void ChangeActive(T entity)
         {
             DbContext.Entry(entity).Property(x => x.Active).IsModified = true;
         }

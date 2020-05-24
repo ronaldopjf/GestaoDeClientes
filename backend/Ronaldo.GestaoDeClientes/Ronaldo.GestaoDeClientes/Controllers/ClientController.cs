@@ -50,7 +50,7 @@ namespace Ronaldo.GestaoDeClientes.Api.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Update([FromBody]ClientForUpdateDto clientForUpdateDto)
         {
             var result = _clientService.Update(clientForUpdateDto);
@@ -71,6 +71,7 @@ namespace Ronaldo.GestaoDeClientes.Api.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             var result = _clientService.Delete(id);
+
             if (result.Success)
             {
                 return Ok(result.Object);

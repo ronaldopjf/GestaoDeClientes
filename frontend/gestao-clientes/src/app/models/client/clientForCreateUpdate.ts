@@ -6,6 +6,8 @@ export class ClientForCreateUpdate {
     socialSecurityNumber: number;
     dateOfBirth: Date;
     sex: string = 'Feminino';
+    idAddress: number;
     address: Address = new Address();
     idOccupation: number;
+    active: boolean;
 }

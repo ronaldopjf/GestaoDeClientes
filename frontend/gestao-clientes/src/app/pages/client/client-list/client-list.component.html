@@ -4,7 +4,8 @@
 </mat-form-field>
 
 <div class="example-button-container">
-    <button mat-mini-fab class="btn-plus" aria-label="Example icon button with a plus one icon" (click)="addClient()">
+    <button mat-mini-fab class="btn-plus" aria-label="Example icon button with a plus one icon"
+        (click)="createClient()">
         <mat-icon>plus_one</mat-icon>
     </button>
 </div>
@@ -32,14 +33,9 @@
             <td mat-cell *matCellDef="let row">{{ row.sex }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Endereço</th>
-            <td mat-cell *matCellDef="let row">{{ row.address }}</td>
-        </ng-container>
-
         <ng-container matColumnDef="occupation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Cargo</th>
-            <td mat-cell *matCellDef="let row">{{ row.occupation }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.occupation.name }}</td>
         </ng-container>
 
         <ng-container matColumnDef="active">
@@ -51,11 +47,14 @@
             <th mat-header-cell *matHeaderCellDef>Ações</th>
             <td mat-cell *matCellDef="let row">
                 <mat-menu #appMenu="matMenu" yPosition="above">
-                    <button mat-menu-item *ngIf="row.active" (click)="editClient(row)">
-                        <mat-icon>edit</mat-icon>Editar
+                    <button mat-menu-item *ngIf="row.active" (click)="updateClient(row)">
+                        <mat-icon>edit</mat-icon>Atualizar
                     </button>
                     <button mat-menu-item *ngIf="row.active" (click)="deleteClient(row)">
                         <mat-icon>delete</mat-icon>Excluir
+                    </button>
+                    <button mat-menu-item (click)="row.active ? inactivateClient(row) : activateClient(row)">
+                        <mat-icon>delete</mat-icon>{{ row.active ? 'Inativar' : 'Ativar' }}
                     </button>
                 </mat-menu>
                 <button class="dropdown-icon" mat-icon-button [matMenuTriggerFor]="appMenu">

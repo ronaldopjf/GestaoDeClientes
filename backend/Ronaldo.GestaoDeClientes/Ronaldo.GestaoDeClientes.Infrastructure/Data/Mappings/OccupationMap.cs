@@ -24,6 +24,10 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Mappings
             builder.Property(x => x.Active)
                 .HasDefaultValue(true)
                 .HasColumnName("FL_ATIVO");
+
+            builder.HasMany(o => o.Clients)
+                .WithOne(c => c.Occupation)
+                .HasForeignKey(c => c.IdOccupation);
         }
     }
 }

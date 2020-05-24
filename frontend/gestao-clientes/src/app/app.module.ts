@@ -6,6 +6,8 @@ import { DemoMaterialModule } from 'src/shared/material-module';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
+import { LoginModule } from './pages/login/login.module';
+import { RegisterModule } from './pages/register/register.module';
 import { ClientModule } from './pages/client/client.module';
 import { OccupationModule } from './pages/occupation/occupation.module';
 
@@ -19,6 +21,8 @@ import { OccupationModule } from './pages/occupation/occupation.module';
     HttpClientModule,
     AppRoutingModule,
     DemoMaterialModule,
+    LoginModule,
+    RegisterModule,
     ClientModule,
     OccupationModule
   ],

@@ -51,9 +51,28 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
                 : new ResponseObject<ClientForGetDto>(false);
         }
 
-        public ResponseObject<ClientForGetDto> Update(ClientForUpdateDto clientForEditDto)
+        public ResponseObject<ClientForGetDto> Update(ClientForUpdateDto clientForUpdateDto)
         {
-            throw new System.NotImplementedException();
+            var occupation = _occupationRepository.GetById(clientForUpdateDto.IdOccupation);
+            if (occupation == null)
+            {
+                return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com o id informado");
+            }
+
+            var verifyUserBd = _clientRepository.GetById(clientForUpdateDto.Id);
+            if (verifyUserBd == null)
+            {
+                return new ResponseObject<ClientForGetDto>(false, "Não existe usuário com o id informado");
+            }
+
+            var client = _mapper.Map<Client>(clientForUpdateDto);
+
+            _clientRepository.Update(client);
+            var commit = _unityOfWork.Commit();
+
+            return commit
+                ? new ResponseObject<ClientForGetDto>(true, obj: _mapper.Map<ClientForGetDto>(client))
+                : new ResponseObject<ClientForGetDto>(false);
         }
 
         public ResponseObject<bool> Delete(int id)
@@ -62,18 +81,38 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
             var commit = _unityOfWork.Commit();
 
             return commit
-                ? new ResponseObject<bool>(true,null,true)
-                : new ResponseObject<bool>(false, null, false);
+                ? new ResponseObject<bool>(true, "Ação realizada com sucesso", true)
+                : new ResponseObject<bool>(false, "A ação falhou", false);
         }
 
         public ResponseObject<bool> Activate(int id)
         {
-            throw new System.NotImplementedException();
+            var clientForCheckId = _clientRepository.GetById(id);
+            if (clientForCheckId == null)
+            {
+                return new ResponseObject<bool>(false, "Não há cliente com o ID fornecido", false);
+            }
+
+            var client = new Client { Id = id, Active = true };
+            _clientRepository.ChangeActive(client);
+
+            var commit = _unityOfWork.Commit();
+            return new ResponseObject<bool>(commit, obj: commit);
         }
 
         public ResponseObject<bool> Inactivate(int id)
         {
-            throw new System.NotImplementedException();
+            var clientForCheckId = _clientRepository.GetById(id);
+            if (clientForCheckId == null)
+            {
+                return new ResponseObject<bool>(false, "Não há cliente com o ID fornecido", false);
+            }
+
+            var client = new Client { Id = id, Active = false };
+            _clientRepository.ChangeActive(client);
+
+            var commit = _unityOfWork.Commit();
+            return new ResponseObject<bool>(commit, obj: commit);
         }
     }
 }

@@ -4,11 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { isNullOrUndefined } from 'util';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition
-} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ClientForList } from 'src/app/models/client/clientForList';
 import { ClientService } from 'src/app/services/client.service';
@@ -23,17 +19,15 @@ import { ClientForCreateUpdate } from 'src/app/models/client/clientForCreateUpda
 export class ClientListComponent implements OnInit {
   public clients: ClientForList[] = [];
   private clientForCreateUpdate = new ClientForCreateUpdate();
-  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'address', 'occupation', 'active', 'actions'];
+  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'occupation', 'active', 'actions'];
   public dataSource: MatTableDataSource<ClientForList>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  private horizontalPosition: MatSnackBarHorizontalPosition = 'right';
-  private verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(
     private clientService: ClientService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -48,50 +42,99 @@ export class ClientListComponent implements OnInit {
     this.clientService.getClients().subscribe(next => {
       this.dataSource.data = next;
     }, () => {
+      this.openSnackBar('A ação falhou', 'Listar Clientes');
     });
   }
 
-  public addClient(): void {
+  public createClient(): void {
     const dialogRef = this.dialog.open(ClientCreateUpdateComponent, {
       width: '60%',
       data: {
-        description: 'Cadastrar Cliente',
+        description: 'Criar Cliente',
         clientForCreateUpdate: this.clientForCreateUpdate
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (!isNullOrUndefined(result)) {
-        this.createClient(result);
+        this.registerClient(result);
       }
     });
   }
 
-  private createClient(clientForRegister: ClientForCreateUpdate): void {
+  private registerClient(clientForRegister: ClientForCreateUpdate): void {
+    this.clientForCreateUpdate = new ClientForCreateUpdate();
     this.clientService.createClient(clientForRegister).subscribe(next => {
-      this.openSnackBar('Ação com sucesso', 'Cadastrar');
-      this.clientForCreateUpdate = new ClientForCreateUpdate();
+      this.openSnackBar('Ação realizada com sucesso', 'Criar Cliente');
       this.getClients();
     }, () => {
-      this.openSnackBar('Ação falhou', 'Cadastrar');
+      this.openSnackBar('A ação falhou', 'Criar Cliente');
     });
   }
 
-  public editClient(client: ClientForList): void {
-    this.clientService.editClient(client).subscribe(next => {
-      this.openSnackBar('Ação com sucesso', 'Editar');
+  public updateClient(client: ClientForList): void {
+    this.prepareClientForUpdate(client);
+    const dialogRef = this.dialog.open(ClientCreateUpdateComponent, {
+      width: '60%',
+      data: {
+        description: 'Atualizar Cliente',
+        clientForCreateUpdate: this.clientForCreateUpdate
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!isNullOrUndefined(result)) {
+        this.editClient(result);
+      }
+    });
+  }
+
+  private editClient(clientForEdit: ClientForCreateUpdate): void {
+    this.clientForCreateUpdate = new ClientForCreateUpdate();
+    this.clientService.editClient(clientForEdit).subscribe(next => {
+      this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cliente');
       this.getClients();
     }, () => {
-      this.openSnackBar('Ação falhou', 'Editar');
+      this.openSnackBar('A ação falhou', 'Atualizar Cliente');
     });
+  }
+
+  private prepareClientForUpdate(client: ClientForList): void {
+    this.clientForCreateUpdate.id = client.id;
+    this.clientForCreateUpdate.name = client.name;
+    this.clientForCreateUpdate.socialSecurityNumber = client.socialSecurityNumber;
+    this.clientForCreateUpdate.dateOfBirth = client.dateOfBirth;
+    this.clientForCreateUpdate.sex = client.sex;
+    this.clientForCreateUpdate.idAddress = client.address.id;
+    this.clientForCreateUpdate.address = client.address;
+    this.clientForCreateUpdate.idOccupation = client.occupation.id;
+    this.clientForCreateUpdate.active = client.active;
   }
 
   public deleteClient(client: ClientForList): void {
     this.clientService.deleteClient(client).subscribe(next => {
-      this.openSnackBar('Ação com sucesso', 'Excluir');
+      this.openSnackBar('Ação realizada com sucesso', 'Excluir Cliente');
       this.getClients();
     }, () => {
-      this.openSnackBar('Ação falhou', 'Excluir');
+      this.openSnackBar('A ação falhou', 'Excluir Cliente');
+    });
+  }
+
+  public activateClient(client: ClientForList): void {
+    this.clientService.activateClient(client).subscribe(next => {
+      this.openSnackBar('Ação realizada com sucesso', 'Ativar Cliente');
+      this.getClients();
+    }, () => {
+      this.openSnackBar('A ação falhou', 'Ativar Cliente');
+    });
+  }
+
+  public inactivateClient(client: ClientForList): void {
+    this.clientService.inactivateClient(client).subscribe(next => {
+      this.openSnackBar('Ação realizada com sucesso', 'Inativar Cliente');
+      this.getClients();
+    }, () => {
+      this.openSnackBar('A ação falhou', 'Inativar Cliente');
     });
   }
 
@@ -105,10 +148,10 @@ export class ClientListComponent implements OnInit {
   }
 
   public openSnackBar(message: string, action: string): void {
-    this._snackBar.open(message, action, {
+    this.snackBar.open(message, action, {
       duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
     });
   }
 }
