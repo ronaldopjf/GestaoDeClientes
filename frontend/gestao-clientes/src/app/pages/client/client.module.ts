@@ -9,6 +9,7 @@ import { ClientDetailsComponent } from './client-details/client-details.componen
 import { ClientCreateUpdateComponent } from './client-create-update/client-create-update.component';
 import { ClientService } from 'src/app/services/client.service';
 import { OccupationService } from 'src/app/services/occupation.service';
+import { PostalCodeService } from 'src/app/services/postal-code.service';
 import { ConfirmDialogModule } from 'src/shared/confirm/confirm-dialog.module';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ConfirmDialogModule } from 'src/shared/confirm/confirm-dialog.module';
   ],
   providers: [
     ClientService,
-    OccupationService
+    OccupationService,
+    PostalCodeService
   ]
 })
 export class ClientModule { }

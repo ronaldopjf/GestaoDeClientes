@@ -5,19 +5,19 @@
     <mat-label class="mat-label">Dados Pessoais:</mat-label>
     <mat-form-field color="accent">
         <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.name" name="name" required maxlength="100"
-            placeholder="Nome" />
+        <input matInput name="name" required maxlength="100" placeholder="Nome"
+            [(ngModel)]="data.clientForCreateUpdate.name" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>CPF</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.socialSecurityNumber" name="socialSecurityNumber"
-            required maxlength="11" placeholder="CPF" />
+        <input matInput type="number" name="socialSecurityNumber" required maxlength="11" placeholder="CPF"
+            [(ngModel)]="data.clientForCreateUpdate.socialSecurityNumber" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Cargo</mat-label>
-        <mat-select [(ngModel)]="data.clientForCreateUpdate.idOccupation" name="idOccupation" required>
+        <mat-select name="idOccupation" required [(ngModel)]="data.clientForCreateUpdate.idOccupation">
             <mat-option *ngFor="let occupation of occupations" [value]="occupation.id">
                 {{ occupation.name }}
             </mat-option>
@@ -26,15 +26,15 @@
 
     <mat-form-field color="accent">
         <mat-label>Data de Nascimento</mat-label>
-        <input matInput [matDatepicker]="dataNascimento" [(ngModel)]="data.clientForCreateUpdate.dateOfBirth"
-            name="dateOfBirth" required placeholder="Data de Nascimento" />
+        <input matInput [matDatepicker]="dataNascimento" name="dateOfBirth" required placeholder="Data de Nascimento"
+            [(ngModel)]="data.clientForCreateUpdate.dateOfBirth" />
         <mat-datepicker-toggle matSuffix [for]="dataNascimento"></mat-datepicker-toggle>
         <mat-datepicker #dataNascimento></mat-datepicker>
     </mat-form-field>
 
     <mat-label id="radio-group-label">Selecione o Sexo: </mat-label>
-    <mat-radio-group aria-labelledby="radio-group-label" class="example-radio-group"
-        [(ngModel)]="data.clientForCreateUpdate.sex" required>
+    <mat-radio-group aria-labelledby="radio-group-label" class="example-radio-group" required
+        [(ngModel)]="data.clientForCreateUpdate.sex">
         <mat-radio-button class="example-radio-button" *ngFor="let sex of genders" [value]="sex">
             {{ sex }}
         </mat-radio-button>
@@ -43,50 +43,44 @@
     <mat-label class="mat-label">Endereço:</mat-label>
     <mat-form-field color="accent">
         <mat-label>CEP</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.postalCode" name="postalCode" type="number"
-            required maxlength="8" placeholder="CEP" />
+        <input matInput type="text" name="postalCode" required maxlength="8" placeholder="CEP"
+            [(ngModel)]="data.clientForCreateUpdate.address.postalCode" (blur)="getAddress($event.target.value)" />
     </mat-form-field>
 
     <mat-form-field color="accent">
-        <mat-label>Tipo do Logradouro</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.typeOfAddress" name="typeOfAddress" required
-            maxlength="12" placeholder="Tipo do Logradouro" />
-    </mat-form-field>
-
-    <mat-form-field color="accent">
-        <mat-label>Nome do Logradouro</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.streetName" name="streetName" required
-            maxlength="100" placeholder="Nome do Logradouro" />
+        <mat-label>Logradouro</mat-label>
+        <input matInput name="publicPlace" required maxlength="12" placeholder="Logradouro"
+            [(ngModel)]="data.clientForCreateUpdate.address.publicPlace" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Número</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.number" name="number" type="number" required
-            placeholder="Número" />
+        <input matInput name="number" type="number" required placeholder="Número"
+            [(ngModel)]="data.clientForCreateUpdate.address.number" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Complemento</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.complement" name="complement" maxlength="50"
-            placeholder="Complemento" />
+        <input matInput name="complement" maxlength="50" placeholder="Complemento"
+            [(ngModel)]="data.clientForCreateUpdate.address.complement" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Bairro</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.neighborhood" name="neighborhood" required
-            maxlength="50" placeholder="Bairro" />
+        <input matInput name="neighborhood" required maxlength="50" placeholder="Bairro"
+            [(ngModel)]="data.clientForCreateUpdate.address.neighborhood" />
     </mat-form-field>
 
     <mat-form-field color="accent">
-        <mat-label>Cidade</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.city" name="city" required maxlength="50"
-            placeholder="Cidade" />
+        <mat-label>Localidade</mat-label>
+        <input matInput name="locality" required maxlength="50" placeholder="Localidade"
+            [(ngModel)]="data.clientForCreateUpdate.address.locality" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Estado</mat-label>
-        <input matInput [(ngModel)]="data.clientForCreateUpdate.address.state" name="state" required maxlength="50"
-            placeholder="Estado" />
+        <input matInput name="state" required maxlength="50" placeholder="Estado"
+            [(ngModel)]="data.clientForCreateUpdate.address.state" />
     </mat-form-field>
 
 </div>

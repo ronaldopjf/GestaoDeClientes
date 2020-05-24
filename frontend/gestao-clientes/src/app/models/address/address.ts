@@ -1,12 +1,21 @@
 export class Address {
-    id: number;
-    typeOfAddress: string;
-    streetName: string;
+    id?: number;
+    postalCode: string;
+    publicPlace: string;
     number: number;
-    complement: string;
+    complement?: string;
     neighborhood: string;
-    city: string;
+    locality: string;
     state: string;
-    postalCode: number;
-    active: boolean;
+    active?: boolean;
+
+    // cep: string;
+    // logradouro: string;
+    // complemento: string;
+    // bairro: string;
+    // localidade: string;
+    // uf: string;
+    // unidade?: string;
+    // ibge?: string;
+    // gia?: string;
 }
