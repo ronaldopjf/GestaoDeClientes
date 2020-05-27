@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class BaseService {
 
-  constructor(private httpClient: HttpClient) { }
+  public constructor(private httpClient: HttpClient) { }
 
   public get(url, params = ''): Observable<any> {
     return this.httpClient.get(`${url}/${params}`)

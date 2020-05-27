@@ -11,7 +11,7 @@
 
     <mat-form-field color="accent">
         <mat-label>CPF</mat-label>
-        <input matInput type="number" name="socialSecurityNumber" required maxlength="11" placeholder="CPF"
+        <input matInput name="socialSecurityNumber" required maxlength="14" placeholder="CPF"
             [(ngModel)]="data.clientForCreateUpdate.socialSecurityNumber" />
     </mat-form-field>
 
@@ -40,22 +40,34 @@
         </mat-radio-button>
     </mat-radio-group>
 
+    <mat-form-field color="accent">
+        <mat-label>E-Mail</mat-label>
+        <input matInput name="email" required maxlength="50" placeholder="E-Mail"
+            [(ngModel)]="data.clientForCreateUpdate.email" />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>Senha</mat-label>
+        <input matInput name="password" required maxlength="50" placeholder="Senha"
+            [(ngModel)]="data.clientForCreateUpdate.password" />
+    </mat-form-field>
+
     <mat-label class="mat-label">Endereço:</mat-label>
     <mat-form-field color="accent">
         <mat-label>CEP</mat-label>
-        <input matInput type="text" name="postalCode" required maxlength="8" placeholder="CEP"
+        <input matInput name="postalCode" required maxlength="10" placeholder="CEP"
             [(ngModel)]="data.clientForCreateUpdate.address.postalCode" (blur)="getAddress($event.target.value)" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Logradouro</mat-label>
-        <input matInput name="publicPlace" required maxlength="12" placeholder="Logradouro"
+        <input matInput name="publicPlace" required maxlength="100" placeholder="Logradouro"
             [(ngModel)]="data.clientForCreateUpdate.address.publicPlace" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Número</mat-label>
-        <input matInput name="number" type="number" required placeholder="Número"
+        <input matInput type="number" name="number" required placeholder="Número"
             [(ngModel)]="data.clientForCreateUpdate.address.number" />
     </mat-form-field>
 

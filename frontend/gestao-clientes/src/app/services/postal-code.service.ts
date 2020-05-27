@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class PostalCodeService {
   private postalCodeUrl: string;
 
-  constructor(private httpClient: HttpClient) {
+  public constructor(private httpClient: HttpClient) {
     this.postalCodeUrl = environment.urlPostalCode;
   }
 

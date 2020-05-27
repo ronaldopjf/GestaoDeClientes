@@ -22,9 +22,9 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Mappings
                 .HasColumnName("NM_CLIENTE");
 
             builder.Property(x => x.SocialSecurityNumber)
-                .HasMaxLength(11)
+                .HasMaxLength(14)
                 .IsRequired()
-                .HasColumnName("NR_CPF");
+                .HasColumnName("DS_CPF");
 
             builder.Property(x => x.DateOfBirth)
                 .IsRequired()
@@ -34,6 +34,16 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Mappings
                 .HasMaxLength(10)
                 .IsRequired()
                 .HasColumnName("DS_SEXO");
+
+            builder.Property(x => x.Email)
+                .HasMaxLength(50)
+                .IsRequired()
+                .HasColumnName("DS_EMAIL");
+
+            builder.Property(x => x.Password)
+                .HasMaxLength(50)
+                .IsRequired()
+                .HasColumnName("DS_SENHA");
 
             builder.Property(x => x.IdAddress)
                 .IsRequired()

@@ -3,9 +3,11 @@ import { Address } from '../address/address';
 export class ClientForCreateUpdate {
     id: number;
     name: string;
-    socialSecurityNumber: number;
+    socialSecurityNumber: string;
     dateOfBirth: Date;
     sex: string = 'Feminino';
+    email: string;
+    password: string;
     idAddress: number;
     address: Address = new Address();
     idOccupation: number;

@@ -20,12 +20,12 @@ import { ConfirmDialogComponent } from 'src/shared/confirm/confirm-dialog/confir
 export class ClientListComponent implements OnInit {
   public clients: ClientForList[] = [];
   private clientForCreateUpdate = new ClientForCreateUpdate();
-  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'occupation', 'active', 'actions'];
+  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'email', 'occupation', 'active', 'actions'];
   public dataSource: MatTableDataSource<ClientForList>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(
+  public constructor(
     private clientService: ClientService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -56,6 +56,7 @@ export class ClientListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.clientForCreateUpdate = new ClientForCreateUpdate();
       if (!isNullOrUndefined(result)) {
         this.registerClient(result);
       }
@@ -63,7 +64,6 @@ export class ClientListComponent implements OnInit {
   }
 
   private registerClient(clientForRegister: ClientForCreateUpdate): void {
-    this.clientForCreateUpdate = new ClientForCreateUpdate();
     this.clientService.createClient(clientForRegister).subscribe(next => {
       this.openSnackBar('Ação realizada com sucesso', 'Criar Cliente');
       this.getClients();
@@ -83,6 +83,7 @@ export class ClientListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.clientForCreateUpdate = new ClientForCreateUpdate();
       if (!isNullOrUndefined(result)) {
         this.editClient(result);
       }
@@ -90,7 +91,6 @@ export class ClientListComponent implements OnInit {
   }
 
   private editClient(clientForEdit: ClientForCreateUpdate): void {
-    this.clientForCreateUpdate = new ClientForCreateUpdate();
     this.clientService.editClient(clientForEdit).subscribe(next => {
       this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cliente');
       this.getClients();
@@ -105,6 +105,8 @@ export class ClientListComponent implements OnInit {
     this.clientForCreateUpdate.socialSecurityNumber = client.socialSecurityNumber;
     this.clientForCreateUpdate.dateOfBirth = client.dateOfBirth;
     this.clientForCreateUpdate.sex = client.sex;
+    this.clientForCreateUpdate.email = client.email;
+    this.clientForCreateUpdate.password = client.password;
     this.clientForCreateUpdate.idAddress = client.address.id;
     this.clientForCreateUpdate.address = client.address;
     this.clientForCreateUpdate.idOccupation = client.occupation.id;

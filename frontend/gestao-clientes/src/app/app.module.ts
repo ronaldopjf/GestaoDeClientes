@@ -1,30 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { DemoMaterialModule } from 'src/shared/material-module';
 
-import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
-import { LoginModule } from './pages/login/login.module';
-import { RegisterModule } from './pages/register/register.module';
-import { ClientModule } from './pages/client/client.module';
-import { OccupationModule } from './pages/occupation/occupation.module';
+import { AppRoutingModule } from './app.routing';
+import { LoginModule } from './layout/login/login.module';
+import { RootModule } from './layout/root/root.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
-    DemoMaterialModule,
     LoginModule,
-    RegisterModule,
-    ClientModule,
-    OccupationModule
+    RootModule
   ],
   bootstrap: [AppComponent]
 })

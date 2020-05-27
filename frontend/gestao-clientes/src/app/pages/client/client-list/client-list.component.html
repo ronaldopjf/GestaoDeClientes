@@ -33,6 +33,11 @@
             <td mat-cell *matCellDef="let row">{{ row.sex }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>E-Mail</th>
+            <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+        </ng-container>
+
         <ng-container matColumnDef="occupation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Cargo</th>
             <td mat-cell *matCellDef="let row">{{ row.occupation.name }}</td>

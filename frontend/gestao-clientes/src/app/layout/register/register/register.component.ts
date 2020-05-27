@@ -12,7 +12,7 @@ import { OccupationService } from 'src/app/services/occupation.service';
 export class RegisterComponent implements OnInit {
   public occupations: Occupation[] = [];
 
-  constructor(
+  public constructor(
     private occupationService: OccupationService,
     private snackBar: MatSnackBar
   ) { }

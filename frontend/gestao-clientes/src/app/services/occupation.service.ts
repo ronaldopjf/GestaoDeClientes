@@ -9,7 +9,7 @@ import { BaseService } from './base.service';
 export class OccupationService extends BaseService {
     private occupationUrl: string;
 
-    constructor(http: HttpClient) {
+    public constructor(http: HttpClient) {
         super(http);
         this.occupationUrl = environment.urlAPI + 'occupation';
     }

@@ -1,0 +1,28 @@
+<mat-toolbar color="primary" class="app-header">
+
+    <mat-toolbar-row>
+
+        <button (click)="toggleMenu()" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <div><a mat-button routerLink="/root" class="appName">ClientsApp</a></div>
+
+        <span class="menu-spacer">
+            <a mat-button routerLink="/root">Início</a>
+            <a mat-button routerLink="/client">Clientes</a>
+            <a mat-button routerLink="/occupation">Cargos</a>
+        </span>
+
+        <span class="nav-tool-items">
+            <a mat-button routerLink="/login">Login</a>
+            <a mat-button mat-raised-button routerLink="/register">Registrar</a>
+        </span>
+
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+        <span class="span-row">ClientsApp ajuda você a gerenciar facilmente seus clientes</span>
+    </mat-toolbar-row>
+
+</mat-toolbar>

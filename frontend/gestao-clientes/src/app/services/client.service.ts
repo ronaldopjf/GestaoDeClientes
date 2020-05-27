@@ -11,7 +11,7 @@ import { ClientForList } from '../models/client/clientForList';
 export class ClientService extends BaseService {
   private clientUrl: string;
 
-  constructor(http: HttpClient) {
+  public constructor(http: HttpClient) {
     super(http);
     this.clientUrl = environment.urlAPI + 'client';
   }

@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.AuthAggregate.Interfaces.Repositories;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.AuthAggregate.Interfaces.Services;
+using Ronaldo.GestaoDeClientes.Core.Aggregates.AuthAggregate.Services;
 using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Interfaces.Repositories;
 using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Interfaces.Services;
 using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services;
@@ -28,11 +31,13 @@ namespace Ronaldo.GestaoDeClientes.Cross_Cutting.Injector
             services.AddScoped<IUnityOfWork, UnityOfWork>();
 
             // Services
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IOccupationService, OccupationService>();
             services.AddScoped<IAddressService, AddressService>();
 
             // Repositories
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IOccupationRepository, OccupationRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();

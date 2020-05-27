@@ -16,15 +16,15 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Mappings
                 .ValueGeneratedOnAdd()
                 .HasColumnName("ID_ENDERECO");
 
-            builder.Property(x => x.TypeOfAddress)
-                .HasMaxLength(12)
+            builder.Property(x => x.PostalCode)
+                .HasMaxLength(10)
                 .IsRequired()
-                .HasColumnName("DS_TIPO_LOGRADOURO");
+                .HasColumnName("DS_CEP");
 
-            builder.Property(x => x.StreetName)
+            builder.Property(x => x.PublicPlace)
                 .HasMaxLength(100)
                 .IsRequired()
-                .HasColumnName("NM_LOGRADOURO");
+                .HasColumnName("DS_LOGRADOURO");
 
             builder.Property(x => x.Number)
                 .IsRequired()
@@ -39,20 +39,15 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Mappings
                 .IsRequired()
                 .HasColumnName("NM_BAIRRO");
 
-            builder.Property(x => x.City)
+            builder.Property(x => x.Locality)
                 .HasMaxLength(50)
                 .IsRequired()
-                .HasColumnName("NM_CIDADE");
+                .HasColumnName("NM_LOCALIDADE");
 
             builder.Property(x => x.State)
                 .HasMaxLength(50)
                 .IsRequired()
                 .HasColumnName("NM_ESTADO");
-
-            builder.Property(x => x.PostalCode)
-                .HasMaxLength(8)
-                .IsRequired()
-                .HasColumnName("NR_CEP");
 
             builder.Property(x => x.Active)
                 .HasDefaultValue(true)

@@ -8,14 +8,16 @@
         <form class="example-form">
             <mat-card-content>
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Nome do usuário">
+                    <input matInput type="text" name="email" required maxlength="50" placeholder="Email"
+                        [(ngModel)]="clientForLogin.email" />
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Senha">
+                    <input matInput type="password" name="password" required maxlength="50" placeholder="Senha"
+                        [(ngModel)]="clientForLogin.password" />
                 </mat-form-field>
             </mat-card-content>
-            <button mat-stroked-button color="accent" class="btn-block">Conecte-se</button>
+            <button mat-stroked-button color="accent" class="btn-block" (click)="login()">Conecte-se</button>
         </form>
     </mat-card>
 

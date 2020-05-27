@@ -1,0 +1,29 @@
+mat-drawer-container {
+    height: 90%;
+}
+
+mat-drawer {
+    height: 100%;
+    padding: 20px;
+    background-color: cornflowerblue;
+}
+
+mat-drawer-content {
+    background-image: url(../../../assets/images/Dunning-Management.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-item {
+    color: white;
+}
+
+.list-item-close {
+    color: red;
+}
