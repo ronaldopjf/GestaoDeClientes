@@ -38,9 +38,9 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
 
         public ResponseObject<ClientForGetDto> Create(ClientForCreateDto clientForRegisterDto)
         {
-            var occupation = _occupationRepository.GetById(clientForRegisterDto.IdOccupation);
-            if (occupation == null)
-                return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com cargoId informado");
+            var occupationForCheckId = _occupationRepository.GetById(clientForRegisterDto.IdOccupation);
+            if (occupationForCheckId == null)
+                return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com ID informado");
 
             var client = _mapper.Map<Client>(clientForRegisterDto);
             _clientRepository.Create(client);
@@ -53,25 +53,24 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
 
         public ResponseObject<ClientForGetDto> Update(ClientForUpdateDto clientForUpdateDto)
         {
-            var occupation = _occupationRepository.GetById(clientForUpdateDto.IdOccupation);
-            if (occupation == null)
+            var occupationForCheckId = _occupationRepository.GetById(clientForUpdateDto.IdOccupation);
+            if (occupationForCheckId == null)
             {
-                return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com o id informado");
+                return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com o ID informado");
             }
 
-            var verifyUserBd = _clientRepository.GetById(clientForUpdateDto.Id);
-            if (verifyUserBd == null)
+            var clientForCheckId = _clientRepository.GetById(clientForUpdateDto.Id);
+            if (clientForCheckId == null)
             {
-                return new ResponseObject<ClientForGetDto>(false, "Não existe usuário com o id informado");
+                return new ResponseObject<ClientForGetDto>(false, "Não existe um usuário com o ID informado");
             }
 
-            var client = _mapper.Map<Client>(clientForUpdateDto);
-
-            _clientRepository.Update(client);
+            var clientForUpdate = _mapper.Map<Client>(clientForUpdateDto);
+            _clientRepository.Update(clientForUpdate);
             var commit = _unityOfWork.Commit();
 
             return commit
-                ? new ResponseObject<ClientForGetDto>(true, obj: _mapper.Map<ClientForGetDto>(client))
+                ? new ResponseObject<ClientForGetDto>(true, obj: _mapper.Map<ClientForGetDto>(clientForUpdate))
                 : new ResponseObject<ClientForGetDto>(false);
         }
 
@@ -81,8 +80,8 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
             var commit = _unityOfWork.Commit();
 
             return commit
-                ? new ResponseObject<bool>(true, "Ação realizada com sucesso", true)
-                : new ResponseObject<bool>(false, "A ação falhou", false);
+                ? new ResponseObject<bool>(true, "Cliente excluído com sucesso", true)
+                : new ResponseObject<bool>(false, "A exclusão falhou", false);
         }
 
         public ResponseObject<bool> Activate(int id)
@@ -93,8 +92,8 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
                 return new ResponseObject<bool>(false, "Não há cliente com o ID fornecido", false);
             }
 
-            var client = new Client { Id = id, Active = true };
-            _clientRepository.ChangeActive(client);
+            var clientForActive = new Client { Id = id, Active = true };
+            _clientRepository.ChangeActive(clientForActive);
 
             var commit = _unityOfWork.Commit();
             return new ResponseObject<bool>(commit, obj: commit);
@@ -108,8 +107,8 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
                 return new ResponseObject<bool>(false, "Não há cliente com o ID fornecido", false);
             }
 
-            var client = new Client { Id = id, Active = false };
-            _clientRepository.ChangeActive(client);
+            var clientForInactive = new Client { Id = id, Active = false };
+            _clientRepository.ChangeActive(clientForInactive);
 
             var commit = _unityOfWork.Commit();
             return new ResponseObject<bool>(commit, obj: commit);
