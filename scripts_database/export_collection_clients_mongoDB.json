@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "5ed14154c5b3c529d0956da0"
+  },
+  "address": {
+    "id": "1",
+    "postalCode": "36090-340",
+    "publicPlace": "Rua Paulo Garcia",
+    "number": "384",
+    "neighborhood": "Benfica",
+    "locality": "Juiz de Fora",
+    "state": "MG",
+    "active": "true"
+  },
+  "occupation": {
+    "id": "1",
+    "name": "Diretor Financeiro",
+    "active": "true"
+  },
+  "name": "Ronaldo Rodrigo Pereira",
+  "socialSecurityNumber": "878.911.586-49",
+  "dateOfBirth": "1976-08-05",
+  "sex": "Masculino",
+  "email": "ronaldopjf@gmail.com",
+  "password": "Test@1",
+  "active": "true",
+  "__v": 0
+}]
