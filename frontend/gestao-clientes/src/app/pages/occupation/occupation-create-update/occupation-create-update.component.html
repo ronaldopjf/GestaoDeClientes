@@ -1,1 +1,20 @@
-<p>occupation-create-update works!</p>
+<h1 mat-dialog-title>{{ data.description }}</h1>
+
+<div mat-dialog-content>
+
+    <mat-form-field color="accent">
+        <mat-label>Nome</mat-label>
+        <input matInput name="name" required maxlength="100" placeholder="Nome"
+            [(ngModel)]="data.occupationForCreateUpdate.name" />
+    </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-stroked-button (click)="onNoClick()">
+        <mat-icon>clear</mat-icon>Cancelar
+    </button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.occupationForCreateUpdate">
+        <mat-icon>save</mat-icon>Salvar
+    </button>
+</div>
