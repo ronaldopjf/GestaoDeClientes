@@ -6,5 +6,6 @@ module.exports = app => {
         .post(controller.saveClientManagement);
 
     app.route('/api/v1/clientManagement/:clientId')
-        .delete(controller.removeClientManagement);
+        .delete(controller.removeClientManagement)
+        .put(controller.updateClientManagement);
 }
