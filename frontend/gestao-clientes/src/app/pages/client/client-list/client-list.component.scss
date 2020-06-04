@@ -1,3 +1,15 @@
 table {
     width: 100em;
 }
+
+.mat-row:nth-child(even) {
+    background-color: white;
+}
+
+.mat-row:nth-child(odd) {
+    background-color: whitesmoke;
+}
+
+.mat-table .mat-row:hover {
+    background: lightgrey;
+}

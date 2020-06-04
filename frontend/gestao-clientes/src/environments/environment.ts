@@ -4,8 +4,14 @@
 
 export const environment = {
   production: false,
-  // urlAPI: 'http://localhost:8080/',
-  urlAPI: 'http://localhost:5000/',
+
+  //url nodejs API
+  urlAPI: 'http://localhost:8080/',
+
+  //url .NET Core API
+  // urlAPI: 'http://localhost:5000/',
+
+  //url ViaCep API 
   urlPostalCode: 'https://viacep.com.br/ws/'
 };
 

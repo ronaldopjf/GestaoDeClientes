@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
 
 var Client = require('./app/models/client/client');
+var Occupation = require('./app/models/occupation/occupation');
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -25,6 +26,16 @@ router.get('/', function (req, res) {
     res.json({ message: 'API gestao-de-clientes' });
 });
 
+router.route('/occupation')
+    .get(function (req, res) {
+        Occupation.find(function (error, occupations) {
+            if (error) {
+                res.send(error);
+            }
+            res.json(occupations);
+        });
+    })
+
 router.route('/client')
     .get(function (req, res) {
         Client.find(function (error, clients) {
@@ -37,6 +48,7 @@ router.route('/client')
     .post(function (req, res) {
         var client = new Client();
 
+        client.id = req.body.id;
         client.name = req.body.name;
         client.socialSecurityNumber = req.body.socialSecurityNumber;
         client.dateOfBirth = req.body.dateOfBirth;
@@ -54,9 +66,9 @@ router.route('/client')
         client.address.state = req.body.address.state;
         client.address.active = "true";
 
-        client.occupation.id = req.body.occupation.id;
-        client.occupation.name = req.body.occupation.name;
-        client.occupation.active = "true";
+        // client.occupation.id = req.body.occupation.id;
+        // client.occupation.name = req.body.occupation.name;
+        // client.occupation.active = "true";
 
         client.save(function (error) {
             if (error) {
