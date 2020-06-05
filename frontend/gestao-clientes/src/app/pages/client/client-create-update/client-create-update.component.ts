@@ -14,7 +14,7 @@ import { PostalCodeService } from 'src/app/services/postal-code.service';
 })
 export class ClientCreateUpdateComponent implements OnInit {
   public occupations: Occupation[] = [];
-  public genders: string[] = ['Feminino', 'Masculino', 'Outro'];
+  public genders: string[] = ['Feminino', 'Masculino'];
 
   public constructor(
     private dialogRef: MatDialogRef<ClientCreateUpdateComponent>,
@@ -46,7 +46,8 @@ export class ClientCreateUpdateComponent implements OnInit {
   }
 
   private changeResultToAddress(result: any): void {
-    this.data.clientForCreateUpdate.address.postalCode = result.cep;
+    if (result.erro)
+      this.data.clientForCreateUpdate.address.postalCode = result.cep;
     this.data.clientForCreateUpdate.address.publicPlace = result.logradouro;
     this.data.clientForCreateUpdate.address.complement = result.complemento;
     this.data.clientForCreateUpdate.address.neighborhood = result.bairro;

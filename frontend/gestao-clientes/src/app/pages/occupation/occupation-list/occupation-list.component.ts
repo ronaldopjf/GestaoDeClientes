@@ -19,7 +19,7 @@ import { ConfirmDialogComponent } from 'src/shared/confirm/confirm-dialog/confir
 export class OccupationListComponent implements OnInit {
   public occupations: Occupation[] = [];
   private occupationForCreateUpdate = new Occupation();
-  public displayedColumns: string[] = ['name', 'active', 'actions'];
+  public displayedColumns: string[] = ['name', 'actions'];
   public dataSource: MatTableDataSource<Occupation>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -101,7 +101,6 @@ export class OccupationListComponent implements OnInit {
   private prepareOccupationForUpdate(occupation: Occupation): void {
     this.occupationForCreateUpdate.id = occupation.id;
     this.occupationForCreateUpdate.name = occupation.name;
-    this.occupationForCreateUpdate.active = occupation.active;
   }
 
   public confirmDeletion(occupationForDelete: Occupation): void {
@@ -111,35 +110,17 @@ export class OccupationListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!isNullOrUndefined(result)) {
-        this.deleteOccupation(occupationForDelete)
+        this.inactivateOccupation(occupationForDelete)
       }
-    });
-  }
-
-  public deleteOccupation(occupationForDelete: Occupation): void {
-    this.occupationService.deleteOccupation(occupationForDelete).subscribe(next => {
-      this.openSnackBar('Ação realizada com sucesso', 'Excluir Cargo');
-      this.getOccupations();
-    }, () => {
-      this.openSnackBar('A ação falhou', 'Excluir Cargo');
-    });
-  }
-
-  public activateOccupation(occupation: Occupation): void {
-    this.occupationService.activateOccupation(occupation).subscribe(next => {
-      this.openSnackBar('Ação realizada com sucesso', 'Ativar Cargo');
-      this.getOccupations();
-    }, () => {
-      this.openSnackBar('A ação falhou', 'Ativar Cargo');
     });
   }
 
   public inactivateOccupation(occupation: Occupation): void {
     this.occupationService.inactivateOccupation(occupation).subscribe(next => {
-      this.openSnackBar('Ação realizada com sucesso', 'Inativar Cargo');
+      this.openSnackBar('Ação realizada com sucesso', 'Excluir Cargo');
       this.getOccupations();
     }, () => {
-      this.openSnackBar('A ação falhou', 'Inativar Cargo');
+      this.openSnackBar('A ação falhou', 'Excluir Cargo');
     });
   }
 

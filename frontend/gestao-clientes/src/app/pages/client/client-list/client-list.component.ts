@@ -20,7 +20,7 @@ import { ConfirmDialogComponent } from 'src/shared/confirm/confirm-dialog/confir
 export class ClientListComponent implements OnInit {
   public clients: ClientForList[] = [];
   private clientForCreateUpdate = new ClientForCreateUpdate();
-  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'email', 'occupation', 'active', 'actions'];
+  public displayedColumns: string[] = ['name', 'socialSecurityNumber', 'dateOfBirth', 'sex', 'email', 'occupation', 'actions'];
   public dataSource: MatTableDataSource<ClientForList>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -110,7 +110,6 @@ export class ClientListComponent implements OnInit {
     this.clientForCreateUpdate.idAddress = client.address.id;
     this.clientForCreateUpdate.address = client.address;
     this.clientForCreateUpdate.idOccupation = client.occupation.id;
-    this.clientForCreateUpdate.active = client.active;
   }
 
   public confirmDeletion(clientForDelete: ClientForList): void {
@@ -120,35 +119,17 @@ export class ClientListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!isNullOrUndefined(result)) {
-        this.deleteClient(clientForDelete)
+        this.inactivateClient(clientForDelete)
       }
     });
   }
 
-  public deleteClient(clientForDelete: ClientForList): void {
-    this.clientService.deleteClient(clientForDelete).subscribe(next => {
+  public inactivateClient(clientForInactivate: ClientForList): void {
+    this.clientService.inactivateClient(clientForInactivate).subscribe(next => {
       this.openSnackBar('Ação realizada com sucesso', 'Excluir Cliente');
       this.getClients();
     }, () => {
       this.openSnackBar('A ação falhou', 'Excluir Cliente');
-    });
-  }
-
-  public activateClient(client: ClientForList): void {
-    this.clientService.activateClient(client).subscribe(next => {
-      this.openSnackBar('Ação realizada com sucesso', 'Ativar Cliente');
-      this.getClients();
-    }, () => {
-      this.openSnackBar('A ação falhou', 'Ativar Cliente');
-    });
-  }
-
-  public inactivateClient(client: ClientForList): void {
-    this.clientService.inactivateClient(client).subscribe(next => {
-      this.openSnackBar('Ação realizada com sucesso', 'Inativar Cliente');
-      this.getClients();
-    }, () => {
-      this.openSnackBar('A ação falhou', 'Inativar Cliente');
     });
   }
 
