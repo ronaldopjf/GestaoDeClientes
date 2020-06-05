@@ -34,7 +34,7 @@ namespace Ronaldo.GestaoDeClientes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]OccupationForGetDto occupationForCreateDto)
+        public IActionResult Create([FromBody]OccupationForCreateDto occupationForCreateDto)
         {
             var result = _occupationService.Create(occupationForCreateDto);
             if (result.Success)
@@ -51,7 +51,7 @@ namespace Ronaldo.GestaoDeClientes.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody]OccupationForGetDto occupationForUpdateDto)
+        public IActionResult Update([FromBody]OccupationForUpdateDto occupationForUpdateDto)
         {
             var result = _occupationService.Update(occupationForUpdateDto);
             if (result.Success)

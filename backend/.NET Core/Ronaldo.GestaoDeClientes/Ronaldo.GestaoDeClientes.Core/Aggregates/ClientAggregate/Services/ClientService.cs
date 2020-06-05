@@ -7,6 +7,7 @@ using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Interfaces.Re
 using Ronaldo.GestaoDeClientes.Core.SharedKernel.Entities;
 using Ronaldo.GestaoDeClientes.Core.SharedKernel.UnityOfWork;
 using System.Collections.Generic;
+using Ronaldo.GestaoDeClientes.Core.SharedKernel.Validators;
 
 namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
 {
@@ -41,6 +42,9 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
             var occupationForCheckId = _occupationRepository.GetById(clientForRegisterDto.IdOccupation);
             if (occupationForCheckId == null)
                 return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com ID informado");
+
+            if(!ValidaCPF.IsCpf(clientForRegisterDto.SocialSecurityNumber))
+                return new ResponseObject<ClientForGetDto>(false, "CPF Inválido");
 
             var client = _mapper.Map<Client>(clientForRegisterDto);
             _clientRepository.Create(client);

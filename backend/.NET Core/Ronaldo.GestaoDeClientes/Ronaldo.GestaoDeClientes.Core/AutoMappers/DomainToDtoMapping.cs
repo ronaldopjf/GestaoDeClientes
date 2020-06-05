@@ -13,6 +13,8 @@ namespace Ronaldo.GestaoDeClientes.Core.AutoMappers
             CreateMap<Client, ClientForCreateDto>().ReverseMap();
             CreateMap<Client, ClientForUpdateDto>().ReverseMap();
             CreateMap<Occupation, OccupationForGetDto>().ReverseMap();
+            CreateMap<Occupation, OccupationForCreateDto>().ReverseMap();
+            CreateMap<Occupation, OccupationForUpdateDto>().ReverseMap();
         }
     }
 }

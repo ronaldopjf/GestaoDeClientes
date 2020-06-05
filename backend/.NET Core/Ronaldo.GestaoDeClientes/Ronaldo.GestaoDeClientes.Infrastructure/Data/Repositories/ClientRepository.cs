@@ -15,6 +15,7 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Repositories
         public IEnumerable<Client> GetAll()
         {
             var clients = DbContext.Clients
+                .Where(client => client.Active == true)
                 .Include(client => client.Address)
                 .Include(client => client.Occupation)
                 .ToList();

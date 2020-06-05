@@ -13,7 +13,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 var router = express.Router();
 

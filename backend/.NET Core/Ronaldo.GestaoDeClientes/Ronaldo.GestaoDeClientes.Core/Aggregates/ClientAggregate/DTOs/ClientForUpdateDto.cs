@@ -1,11 +1,11 @@
 ﻿using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Entities;
-using Ronaldo.GestaoDeClientes.Core.SharedKernel.Entities;
 using System;
 
 namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
 {
-    public class ClientForUpdateDto : Entity
+    public class ClientForUpdateDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string SocialSecurityNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -15,5 +15,6 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
         public int IdAddress { get; set; }
         public Address Address { get; set; }
         public int IdOccupation { get; set; }
+        public bool Active { get; set; } = true;
     }
 }

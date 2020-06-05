@@ -33,9 +33,9 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Services
             throw new System.NotImplementedException();
         }
 
-        public ResponseObject<OccupationForGetDto> Create(OccupationForGetDto occupationForRegisterDto)
+        public ResponseObject<OccupationForGetDto> Create(OccupationForCreateDto occupationForCreateDto)
         {
-            var occupation = _mapper.Map<Occupation>(occupationForRegisterDto);
+            var occupation = _mapper.Map<Occupation>(occupationForCreateDto);
             _occupationRepository.Create(occupation);
             var commit = _unityOfWork.Commit();
 
@@ -44,15 +44,15 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Services
                 : new ResponseObject<OccupationForGetDto>(false);
         }
 
-        public ResponseObject<OccupationForGetDto> Update(OccupationForGetDto occupationForGetDto)
+        public ResponseObject<OccupationForGetDto> Update(OccupationForUpdateDto occupationForUpdateDto)
         {
-            var occupationForCheckId = _occupationRepository.GetById(occupationForGetDto.Id);
+            var occupationForCheckId = _occupationRepository.GetById(occupationForUpdateDto.Id);
             if (occupationForCheckId == null)
             {
                 return new ResponseObject<OccupationForGetDto>(false, "Não existe um cargo com o ID informado");
             }
 
-            var occupationForUpdate = _mapper.Map<Occupation>(occupationForGetDto);
+            var occupationForUpdate = _mapper.Map<Occupation>(occupationForUpdateDto);
             _occupationRepository.Update(occupationForUpdate);
             var commit = _unityOfWork.Commit();
 

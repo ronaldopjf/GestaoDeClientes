@@ -10,8 +10,8 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Interface
         ResponseObject<bool> Activate(int id);
         ResponseObject<bool> Inactivate(int id);
         ResponseObject<bool> Delete(int id);
-        ResponseObject<OccupationForGetDto> Create(OccupationForGetDto occupationForRegisterDto);
-        ResponseObject<OccupationForGetDto> Update(OccupationForGetDto occupationForEditDto);
+        ResponseObject<OccupationForGetDto> Create(OccupationForCreateDto occupationForRegisterDto);
+        ResponseObject<OccupationForGetDto> Update(OccupationForUpdateDto occupationForEditDto);
         IEnumerable<OccupationForGetDto> GetOccupations();
     }
 }

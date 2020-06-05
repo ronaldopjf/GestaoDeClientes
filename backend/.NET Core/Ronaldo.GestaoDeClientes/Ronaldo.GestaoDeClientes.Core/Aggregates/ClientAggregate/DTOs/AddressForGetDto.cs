@@ -1,9 +1,8 @@
-﻿using Ronaldo.GestaoDeClientes.Core.SharedKernel.Entities;
-
-namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
+﻿namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
 {
-    public class AddressForGetDto : Entity
+    public class AddressForGetDto
     {
+        public int Id { get; set; }
         public string PostalCode { get; set; }
         public string PublicPlace { get; set; }
         public int Number { get; set; }

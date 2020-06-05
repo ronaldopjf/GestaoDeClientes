@@ -1,8 +1,6 @@
-﻿using Ronaldo.GestaoDeClientes.Core.SharedKernel.Entities;
-
-namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
+﻿namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
 {
-    public class AddressForCreateDto : Entity
+    public class AddressForCreateDto
     {
         public string PostalCode { get; set; }
         public string PublicPlace { get; set; }
@@ -11,10 +9,6 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.DTOs
         public string Neighborhood { get; set; }
         public string Locality { get; set; }
         public string State { get; set; }
-
-        public AddressForCreateDto()
-        {
-            Active = true;
-        }
+        public bool Active { get; set; } = true;
     }
 }
