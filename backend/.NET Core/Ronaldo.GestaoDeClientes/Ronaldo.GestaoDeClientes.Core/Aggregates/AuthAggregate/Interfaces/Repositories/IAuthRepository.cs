@@ -5,6 +5,6 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.AuthAggregate.Interfaces.Repo
 {
     public interface IAuthRepository
     {
-        Client Login(ClientForLoginDto clientForLoginDto);
+        Client Authenticate(ClientForLoginDto clientForLoginDto);
     }
 }

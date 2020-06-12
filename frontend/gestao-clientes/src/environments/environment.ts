@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
 
-  //url nodejs API
-  urlAPI: 'http://localhost:3000/',
-
   //url .NET Core API
-  // urlAPI: 'http://localhost:5000/',
+  urlAPI: 'http://localhost:5000/',
+
+  //url nodejs API
+  // urlAPI: 'http://localhost:3000/',
 
   //url ViaCep API 
   urlPostalCode: 'https://viacep.com.br/ws/'

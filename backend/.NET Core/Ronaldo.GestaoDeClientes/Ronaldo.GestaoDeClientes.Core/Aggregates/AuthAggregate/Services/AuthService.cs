@@ -18,9 +18,9 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.AuthAggregate.Services
             _authRepository = authRepository;
         }
 
-        public ResponseObject<ClientForGetDto> Login(ClientForLoginDto clientForLoginDto)
+        public ResponseObject<ClientForGetDto> Authenticate(ClientForLoginDto clientForLoginDto)
         {
-            var client = _authRepository.Login(clientForLoginDto);
+            var client = _authRepository.Authenticate(clientForLoginDto);
 
             if (client == null)
                 return new ResponseObject<ClientForGetDto>(false, "Dados incorretos", null);

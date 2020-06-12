@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, EMPTY, empty } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
@@ -29,12 +29,12 @@ export class AuthService extends BaseService {
     return this.clientSubject.value;
   }
 
-  public login(clientForAuth: ClientForAuth) {
+  public login(clientForAuth: ClientForAuth): Observable<any> {
     return this.post(`${this.urlAuth}/authenticate`, clientForAuth).pipe(map(response => {
-      localStorage.setItem('client', JSON.stringify(response.client));
+      localStorage.setItem('client', JSON.stringify(response.object));
       localStorage.setItem('token', JSON.stringify(response.token));
-      this.clientSubject.next(response.client);
-      return response.client;
+      this.clientSubject.next(response.object);
+      return response.object;
     }));
   }
 

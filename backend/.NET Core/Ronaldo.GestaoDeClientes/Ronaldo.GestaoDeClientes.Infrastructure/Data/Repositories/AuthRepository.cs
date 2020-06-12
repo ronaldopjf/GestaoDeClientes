@@ -15,7 +15,7 @@ namespace Ronaldo.GestaoDeClientes.Infrastructure.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public Client Login(ClientForLoginDto clientForLoginDto)
+        public Client Authenticate(ClientForLoginDto clientForLoginDto)
         {
             var client = _dbContext.Clients
                 .Include(client => client.Address)

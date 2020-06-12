@@ -6,6 +6,6 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.AuthAggregate.Interfaces.Serv
 {
     public interface IAuthService
     {
-        ResponseObject<ClientForGetDto> Login(ClientForLoginDto clientForLoginDto);
+        ResponseObject<ClientForGetDto> Authenticate(ClientForLoginDto clientForLoginDto);
     }
 }

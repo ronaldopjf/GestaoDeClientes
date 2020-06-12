@@ -15,10 +15,10 @@ namespace Ronaldo.GestaoDeClientes.Api.Controllers
             _authService = authService;
         }
 
-        [HttpPost]
+        [HttpPost("authenticate")]
         public IActionResult Authenticate(ClientForLoginDto clientForLoginDto)
         {
-            var result = _authService.Login(clientForLoginDto);
+            var result = _authService.Authenticate(clientForLoginDto);
             if (result.Success)
             {
                 return Ok(result);
