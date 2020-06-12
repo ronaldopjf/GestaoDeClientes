@@ -46,7 +46,7 @@
             [(ngModel)]="data.clientForCreateUpdate.email" />
     </mat-form-field>
 
-    <mat-form-field color="accent">
+    <mat-form-field *ngIf="!data.clientForCreateUpdate.id" color="accent">
         <mat-label>Senha</mat-label>
         <input matInput type="password" name="password" required maxlength="50" placeholder="Senha"
             [(ngModel)]="data.clientForCreateUpdate.password" />

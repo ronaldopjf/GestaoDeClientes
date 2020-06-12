@@ -17,7 +17,7 @@
 
         <ng-container matColumnDef="socialSecurityNumber">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>CPF</th>
-            <td mat-cell *matCellDef="let row">{{ row.socialSecurityNumber }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.socialSecurityNumber | mask: '000.000.000-00' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="dateOfBirth">

@@ -2,7 +2,7 @@ import { Address } from '../address/address';
 import { Occupation } from '../occupation/occupation';
 
 export class ClientForList {
-    id: number;
+    id: any;
     name: string;
     socialSecurityNumber: string;
     dateOfBirth: Date;

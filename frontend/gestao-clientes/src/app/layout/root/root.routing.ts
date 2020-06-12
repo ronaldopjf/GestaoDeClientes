@@ -3,13 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { RootComponent } from './root/root.component';
 
+const clientModule = () => import('../../pages/client/client.module').then(x => x.ClientModule);
+const occupationModule = () => import('../../pages/occupation/occupation.module').then(x => x.OccupationModule);
+
 const routes: Routes = [
   {
     path: '', component: RootComponent, children:
       [
-        { path: '', loadChildren: '../../pages/client/client.module#ClientModule' },
-        { path: 'client', loadChildren: '../../pages/client/client.module#ClientModule' },
-        { path: 'occupation', loadChildren: '../../pages/occupation/occupation.module#OccupationModule' }
+        { path: '', loadChildren: clientModule },
+        { path: 'client', loadChildren: clientModule },
+        { path: 'occupation', loadChildren: occupationModule }
       ]
   }
 ];

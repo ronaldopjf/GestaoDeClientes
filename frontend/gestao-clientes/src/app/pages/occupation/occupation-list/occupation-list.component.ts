@@ -38,8 +38,8 @@ export class OccupationListComponent implements OnInit {
   }
 
   private getOccupations(): void {
-    this.occupationService.getOccupations().subscribe(next => {
-      this.dataSource.data = next;
+    this.occupationService.getOccupations().subscribe(result => {
+      this.dataSource.data = result;
     }, () => {
       this.openSnackBar('A ação falhou', 'Listar Cargos');
     });
@@ -63,7 +63,7 @@ export class OccupationListComponent implements OnInit {
   }
 
   private registerOccupation(occupationForRegister: Occupation): void {
-    this.occupationService.createOccupation(occupationForRegister).subscribe(next => {
+    this.occupationService.createOccupation(occupationForRegister).subscribe(result => {
       this.openSnackBar('Ação realizada com sucesso', 'Criar Cargo');
       this.getOccupations();
     }, () => {
@@ -90,7 +90,7 @@ export class OccupationListComponent implements OnInit {
   }
 
   private editOccupation(occupationForEdit: Occupation): void {
-    this.occupationService.editOccupation(occupationForEdit).subscribe(next => {
+    this.occupationService.editOccupation(occupationForEdit).subscribe(result => {
       this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cargo');
       this.getOccupations();
     }, () => {
@@ -116,7 +116,7 @@ export class OccupationListComponent implements OnInit {
   }
 
   public inactivateOccupation(occupation: Occupation): void {
-    this.occupationService.inactivateOccupation(occupation).subscribe(next => {
+    this.occupationService.inactivateOccupation(occupation).subscribe(result => {
       this.openSnackBar('Ação realizada com sucesso', 'Excluir Cargo');
       this.getOccupations();
     }, () => {

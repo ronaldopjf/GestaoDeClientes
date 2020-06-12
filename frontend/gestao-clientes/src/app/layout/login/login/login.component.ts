@@ -24,12 +24,12 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     if (this.validateFields()) {
-      this.authService.login(this.clientForLogin).subscribe(next => {
+      this.authService.login(this.clientForLogin).subscribe(result => {
         this.openSnackBar('Ação realizada com sucesso', 'Login');
-        localStorage.setItem('loggedInCustomer', next);
+        localStorage.setItem('loggedInCustomer', result);
         this.router.navigate(['/root']);
-      }, () => {
-        this.openSnackBar('A ação falhou', 'Login');
+      }, (error) => {
+        this.openSnackBar(error.error.error, 'Login');
       });
     }
   }

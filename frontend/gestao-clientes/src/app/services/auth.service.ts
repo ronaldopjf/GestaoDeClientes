@@ -15,6 +15,6 @@ export class AuthService extends BaseService {
   }
 
   public login(clientForAuth: ClientForAuth) {
-    return this.post(this.urlAuth, clientForAuth);
+    return this.post(`${this.urlAuth}/authenticate`, clientForAuth);
   }
 }

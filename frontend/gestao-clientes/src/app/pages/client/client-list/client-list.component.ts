@@ -39,8 +39,8 @@ export class ClientListComponent implements OnInit {
   }
 
   private getClients(): void {
-    this.clientService.getClients().subscribe(next => {
-      this.dataSource.data = next;
+    this.clientService.getClients().subscribe(result => {
+      this.dataSource.data = result;
     }, () => {
       this.openSnackBar('A ação falhou', 'Listar Clientes');
     });
@@ -64,7 +64,7 @@ export class ClientListComponent implements OnInit {
   }
 
   private registerClient(clientForRegister: ClientForCreateUpdate): void {
-    this.clientService.createClient(clientForRegister).subscribe(next => {
+    this.clientService.createClient(clientForRegister).subscribe(result => {
       this.openSnackBar('Ação realizada com sucesso', 'Criar Cliente');
       this.getClients();
     }, () => {
@@ -91,9 +91,9 @@ export class ClientListComponent implements OnInit {
   }
 
   private editClient(clientForEdit: ClientForCreateUpdate): void {
-    this.clientService.editClient(clientForEdit).subscribe(next => {
-      this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cliente');
+    this.clientService.editClient(clientForEdit).subscribe(result => {
       this.getClients();
+      this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cliente');
     }, () => {
       this.openSnackBar('A ação falhou', 'Atualizar Cliente');
     });
@@ -107,6 +107,7 @@ export class ClientListComponent implements OnInit {
     this.clientForCreateUpdate.sex = client.sex;
     this.clientForCreateUpdate.email = client.email;
     this.clientForCreateUpdate.password = client.password;
+    this.clientForCreateUpdate.active = client.active;
     this.clientForCreateUpdate.idAddress = client.address.id;
     this.clientForCreateUpdate.address = client.address;
     this.clientForCreateUpdate.idOccupation = client.occupation.id;
@@ -125,7 +126,7 @@ export class ClientListComponent implements OnInit {
   }
 
   public inactivateClient(clientForInactivate: ClientForList): void {
-    this.clientService.inactivateClient(clientForInactivate).subscribe(next => {
+    this.clientService.inactivateClient(clientForInactivate).subscribe(result => {
       this.openSnackBar('Ação realizada com sucesso', 'Excluir Cliente');
       this.getClients();
     }, () => {

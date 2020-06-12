@@ -1,5 +1,5 @@
 export class Occupation {
-    id: number;
+    id: any;
     name: string;
     active: boolean;
 }

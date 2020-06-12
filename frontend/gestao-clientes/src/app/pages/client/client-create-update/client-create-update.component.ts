@@ -29,8 +29,8 @@ export class ClientCreateUpdateComponent implements OnInit {
   }
 
   private getOccupations(): void {
-    this.occupationService.getOccupations().subscribe(next => {
-      this.occupations = next;
+    this.occupationService.getOccupations().subscribe(result => {
+      this.occupations = result;
     }, () => {
       this.openSnackBar('A ação falhou', 'Listar Cargos');
     });

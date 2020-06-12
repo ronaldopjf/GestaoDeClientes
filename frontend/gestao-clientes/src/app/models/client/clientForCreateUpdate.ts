@@ -1,7 +1,7 @@
 import { Address } from '../address/address';
 
 export class ClientForCreateUpdate {
-    id: number;
+    id: any;
     name: string;
     socialSecurityNumber: string;
     dateOfBirth: Date;

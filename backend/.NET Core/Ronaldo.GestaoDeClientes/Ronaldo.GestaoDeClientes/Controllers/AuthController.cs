@@ -16,7 +16,7 @@ namespace Ronaldo.GestaoDeClientes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(ClientForLoginDto clientForLoginDto)
+        public IActionResult Authenticate(ClientForLoginDto clientForLoginDto)
         {
             var result = _authService.Login(clientForLoginDto);
             if (result.Success)
