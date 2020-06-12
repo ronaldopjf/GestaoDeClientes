@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="app-header">
 
-    <mat-toolbar-row>
+    <mat-toolbar-row *ngIf="client">
 
         <button (click)="toggleMenu()" mat-icon-button>
             <mat-icon>menu</mat-icon>
@@ -13,8 +13,8 @@
             <a mat-button routerLink="/root/occupation">Cargos</a>
         </span>
 
-        <span class="nav-tool-items" align="rigth">
-            <a mat-button routerLink="/login">Login</a>
+        <span class="nav-tool-items" align="right">
+            <a mat-button (click)="logout()">Sair</a>
         </span>
 
     </mat-toolbar-row>

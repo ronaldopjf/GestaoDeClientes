@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
     if (this.validateFields()) {
       this.authService.login(this.clientForLogin).subscribe(result => {
         this.openSnackBar('Ação realizada com sucesso', 'Login');
-        localStorage.setItem('loggedInCustomer', result);
         this.router.navigate(['/root']);
       }, (error) => {
         this.openSnackBar(error.error.error, 'Login');
