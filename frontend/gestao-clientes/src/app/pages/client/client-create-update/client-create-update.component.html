@@ -61,8 +61,8 @@
 
     <mat-form-field color="accent">
         <mat-label>Logradouro</mat-label>
-        <input matInput name="publicPlace" required maxlength="100" disabled placeholder="Logradouro"
-            [(ngModel)]="data.clientForCreateUpdate.address.publicPlace" />
+        <input matInput name="publicPlace" required maxlength="100" [readonly]="isReadonlyPublicPlace"
+            placeholder="Logradouro" [(ngModel)]="data.clientForCreateUpdate.address.publicPlace" />
     </mat-form-field>
 
     <mat-form-field color="accent">
@@ -79,19 +79,19 @@
 
     <mat-form-field color="accent">
         <mat-label>Bairro</mat-label>
-        <input matInput name="neighborhood" required maxlength="50" disabled placeholder="Bairro"
-            [(ngModel)]="data.clientForCreateUpdate.address.neighborhood" />
+        <input matInput name="neighborhood" required maxlength="50" [readonly]="isReadonlyNeighborhood"
+            placeholder="Bairro" [(ngModel)]="data.clientForCreateUpdate.address.neighborhood" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Localidade</mat-label>
-        <input matInput name="locality" required maxlength="50" disabled placeholder="Localidade"
+        <input matInput name="locality" required maxlength="50" readonly placeholder="Localidade"
             [(ngModel)]="data.clientForCreateUpdate.address.locality" />
     </mat-form-field>
 
     <mat-form-field color="accent">
         <mat-label>Estado</mat-label>
-        <input matInput name="state" required maxlength="50" disabled placeholder="Estado"
+        <input matInput name="state" required maxlength="50" readonly placeholder="Estado"
             [(ngModel)]="data.clientForCreateUpdate.address.state" />
     </mat-form-field>
 

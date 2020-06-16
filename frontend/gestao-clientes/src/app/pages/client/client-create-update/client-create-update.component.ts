@@ -14,6 +14,8 @@ import { PostalCodeService } from 'src/app/services/postal-code.service';
 })
 export class ClientCreateUpdateComponent implements OnInit {
   public occupations: Occupation[] = [];
+  public isReadonlyPublicPlace: boolean = true;
+  public isReadonlyNeighborhood: boolean = true;
   public genders: string[] = ['Feminino', 'Masculino'];
 
   public constructor(
@@ -46,13 +48,28 @@ export class ClientCreateUpdateComponent implements OnInit {
   }
 
   private changeResultToAddress(result: any): void {
-    if (result.erro)
+    if (result.erro) {
       this.data.clientForCreateUpdate.address.postalCode = result.cep;
+    }
     this.data.clientForCreateUpdate.address.publicPlace = result.logradouro;
-    this.data.clientForCreateUpdate.address.complement = result.complemento;
     this.data.clientForCreateUpdate.address.neighborhood = result.bairro;
     this.data.clientForCreateUpdate.address.locality = result.localidade;
     this.data.clientForCreateUpdate.address.state = result.uf;
+
+    this.setEditFieldOfAddress(result);
+  }
+
+  private setEditFieldOfAddress(result: any): void {
+    if (!result.logradouro) {
+      this.isReadonlyPublicPlace = false;
+    } else {
+      this.isReadonlyPublicPlace = true;
+    }
+    if (!result.bairro) {
+      this.isReadonlyNeighborhood = false;
+    } else {
+      this.isReadonlyNeighborhood = true;
+    }
   }
 
   public openSnackBar(message: string, action: string): void {

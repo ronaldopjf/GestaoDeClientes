@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 import { BaseService } from './base.service';
+import { environment } from 'src/environments/environment';
 import { ClientForCreateUpdate } from '../models/client/clientForCreateUpdate';
 import { ClientForList } from '../models/client/clientForList';
 

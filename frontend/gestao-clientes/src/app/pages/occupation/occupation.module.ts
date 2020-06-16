@@ -21,8 +21,6 @@ import { OccupationService } from 'src/app/services/occupation.service';
     ConfirmDialogModule,
     OccupationRoutingModule
   ],
-  providers: [
-    OccupationService
-  ]
+  providers: [OccupationService]
 })
 export class OccupationModule { }

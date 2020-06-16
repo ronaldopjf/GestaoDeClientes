@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { DemoMaterialModule } from 'src/shared/material-module';
 
+import { DemoMaterialModule } from 'src/shared/material-module';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({

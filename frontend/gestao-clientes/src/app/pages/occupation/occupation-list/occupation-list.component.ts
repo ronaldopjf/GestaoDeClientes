@@ -82,17 +82,17 @@ export class OccupationListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.occupationForCreateUpdate = new Occupation();
       if (!isNullOrUndefined(result)) {
         this.editOccupation(result);
       }
+      this.occupationForCreateUpdate = new Occupation();
     });
   }
 
   private editOccupation(occupationForEdit: Occupation): void {
     this.occupationService.editOccupation(occupationForEdit).subscribe(result => {
-      this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cargo');
       this.getOccupations();
+      this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cargo');
     }, () => {
       this.openSnackBar('A ação falhou', 'Atualizar Cargo');
     });
