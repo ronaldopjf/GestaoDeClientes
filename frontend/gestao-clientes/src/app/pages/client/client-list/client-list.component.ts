@@ -36,6 +36,13 @@ export class ClientListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.getClients();
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      if (property === 'occupation') {
+        return item.occupation.name;
+      } else {
+        return item[property];
+      }
+    };
   }
 
   private getClients(): void {
