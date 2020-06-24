@@ -1,6 +1,6 @@
 ﻿namespace Ronaldo.GestaoDeClientes.Core.SharedKernel.Validators
 {
-    public static class ValidaCPF
+    public static class ValidateCPF
     {
         public static bool IsCpf(string cpf)
         {

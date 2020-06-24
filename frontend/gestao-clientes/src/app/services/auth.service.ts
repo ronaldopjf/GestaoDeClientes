@@ -31,10 +31,10 @@ export class AuthService extends BaseService {
 
   public login(clientForAuth: ClientForAuth): Observable<any> {
     return this.post(`${this.urlAuth}/authenticate`, clientForAuth).pipe(map(response => {
-      localStorage.setItem('client', JSON.stringify(response.object));
+      localStorage.setItem('client', JSON.stringify(response.client));
       localStorage.setItem('token', JSON.stringify(response.token));
-      this.clientSubject.next(response.object);
-      return response.object;
+      this.clientSubject.next(response.client);
+      return response.client;
     }));
   }
 

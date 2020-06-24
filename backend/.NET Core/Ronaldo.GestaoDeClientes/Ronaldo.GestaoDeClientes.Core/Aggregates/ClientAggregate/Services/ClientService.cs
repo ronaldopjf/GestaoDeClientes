@@ -43,7 +43,7 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
             if (occupationForCheckId == null)
                 return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com ID informado");
 
-            if(!ValidaCPF.IsCpf(clientForRegisterDto.SocialSecurityNumber))
+            if(!ValidateCPF.IsCpf(clientForRegisterDto.SocialSecurityNumber))
                 return new ResponseObject<ClientForGetDto>(false, "CPF Inválido");
 
             var client = _mapper.Map<Client>(clientForRegisterDto);

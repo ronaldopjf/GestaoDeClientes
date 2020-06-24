@@ -74,8 +74,8 @@ export class ClientListComponent implements OnInit {
     this.clientService.createClient(clientForRegister).subscribe(result => {
       this.openSnackBar('Ação realizada com sucesso', 'Criar Cliente');
       this.getClients();
-    }, () => {
-      this.openSnackBar('A ação falhou', 'Criar Cliente');
+    }, (error) => {
+      this.openSnackBar(error.error.error, 'Criar Cliente');
     });
   }
 

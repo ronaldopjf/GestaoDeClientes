@@ -1,5 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth');
+const ValidateCpf = require('../../resources/validate/validateCpf');
 
 const Client = require('../models/client');
 const Address = require('../models/address');
@@ -37,6 +38,17 @@ router.get('/:clientId', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+
+    if (!ValidateCpf.isCpf(req.body.socialSecurityNumber)) {
+        return res.status(400).send({ error: 'CPF inválido' });
+    }
+
+    Client.count({ email: req.body.email }, function (err, count) {
+        if (count > 0) {
+            return res.status(400).send({ error: 'Email já cadastrado' });
+        }
+    });
+    
     try {
         const {
             name,
