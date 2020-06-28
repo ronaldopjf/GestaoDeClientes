@@ -6,8 +6,8 @@ using Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Interfaces.Servic
 using Ronaldo.GestaoDeClientes.Core.Aggregates.OccupationAggregate.Interfaces.Repositories;
 using Ronaldo.GestaoDeClientes.Core.SharedKernel.Entities;
 using Ronaldo.GestaoDeClientes.Core.SharedKernel.UnityOfWork;
-using System.Collections.Generic;
 using Ronaldo.GestaoDeClientes.Core.SharedKernel.Validators;
+using System.Collections.Generic;
 
 namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
 {
@@ -39,35 +39,34 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
 
         public ResponseObject<ClientForGetDto> Create(ClientForCreateDto clientForRegisterDto)
         {
+            if (!ValidateCPF.IsCpf(clientForRegisterDto.SocialSecurityNumber))
+                return new ResponseObject<ClientForGetDto>(false, "CPF Inválido");
+
             var occupationForCheckId = _occupationRepository.GetById(clientForRegisterDto.IdOccupation);
             if (occupationForCheckId == null)
                 return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com ID informado");
 
-            if(!ValidateCPF.IsCpf(clientForRegisterDto.SocialSecurityNumber))
-                return new ResponseObject<ClientForGetDto>(false, "CPF Inválido");
-
-            var client = _mapper.Map<Client>(clientForRegisterDto);
-            _clientRepository.Create(client);
+            var clientForRegister = _mapper.Map<Client>(clientForRegisterDto);
+            _clientRepository.Create(clientForRegister);
             var commit = _unityOfWork.Commit();
 
             return commit
-                ? new ResponseObject<ClientForGetDto>(true, obj: _mapper.Map<ClientForGetDto>(client))
+                ? new ResponseObject<ClientForGetDto>(true, obj: _mapper.Map<ClientForGetDto>(clientForRegister))
                 : new ResponseObject<ClientForGetDto>(false);
         }
 
         public ResponseObject<ClientForGetDto> Update(ClientForUpdateDto clientForUpdateDto)
         {
+            if (!ValidateCPF.IsCpf(clientForUpdateDto.SocialSecurityNumber))
+                return new ResponseObject<ClientForGetDto>(false, "CPF Inválido");
+
             var occupationForCheckId = _occupationRepository.GetById(clientForUpdateDto.IdOccupation);
             if (occupationForCheckId == null)
-            {
                 return new ResponseObject<ClientForGetDto>(false, "Não existe um cargo com o ID informado");
-            }
 
             var clientForCheckId = _clientRepository.GetById(clientForUpdateDto.Id);
             if (clientForCheckId == null)
-            {
                 return new ResponseObject<ClientForGetDto>(false, "Não existe um usuário com o ID informado");
-            }
 
             var clientForUpdate = _mapper.Map<Client>(clientForUpdateDto);
             _clientRepository.Update(clientForUpdate);
@@ -92,9 +91,7 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
         {
             var clientForCheckId = _clientRepository.GetById(id);
             if (clientForCheckId == null)
-            {
                 return new ResponseObject<bool>(false, "Não há cliente com o ID fornecido", false);
-            }
 
             var clientForActive = new Client { Id = id, Active = true };
             _clientRepository.ChangeActive(clientForActive);
@@ -107,9 +104,7 @@ namespace Ronaldo.GestaoDeClientes.Core.Aggregates.ClientAggregate.Services
         {
             var clientForCheckId = _clientRepository.GetById(id);
             if (clientForCheckId == null)
-            {
                 return new ResponseObject<bool>(false, "Não há cliente com o ID fornecido", false);
-            }
 
             var clientForInactive = new Client { Id = id, Active = false };
             _clientRepository.ChangeActive(clientForInactive);

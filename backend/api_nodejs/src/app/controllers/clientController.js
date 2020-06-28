@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
             return res.status(400).send({ error: 'Email já cadastrado' });
         }
     });
-    
+
     try {
         const {
             name,
@@ -84,6 +84,11 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
+
+    if (!ValidateCpf.isCpf(req.body.socialSecurityNumber)) {
+        return res.status(400).send({ error: 'CPF inválido' });
+    }
+
     try {
         const updatedAddress = await Address.updateOne(
             { _id: req.body.address._id },

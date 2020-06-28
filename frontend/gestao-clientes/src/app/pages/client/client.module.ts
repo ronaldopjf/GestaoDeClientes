@@ -11,6 +11,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { OccupationService } from 'src/app/services/occupation.service';
 import { PostalCodeService } from 'src/app/services/postal-code.service';
 import { ConfirmDialogModule } from 'src/shared/confirm/confirm-dialog.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ConfirmDialogModule } from 'src/shared/confirm/confirm-dialog.module';
   providers: [
     ClientService,
     OccupationService,
-    PostalCodeService
+    PostalCodeService,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ]
 })
 export class ClientModule { }

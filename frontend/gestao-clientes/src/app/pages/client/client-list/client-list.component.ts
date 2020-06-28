@@ -101,8 +101,9 @@ export class ClientListComponent implements OnInit {
     this.clientService.editClient(clientForEdit).subscribe(result => {
       this.getClients();
       this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cliente');
-    }, () => {
-      this.openSnackBar('A ação falhou', 'Atualizar Cliente');
+    }, (error) => {
+      debugger
+      this.openSnackBar(error.error.error, 'Atualizar Cliente');
     });
   }
 
