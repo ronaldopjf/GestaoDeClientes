@@ -102,7 +102,6 @@ export class ClientListComponent implements OnInit {
       this.getClients();
       this.openSnackBar('Ação realizada com sucesso', 'Atualizar Cliente');
     }, (error) => {
-      debugger
       this.openSnackBar(error.error.error, 'Atualizar Cliente');
     });
   }
