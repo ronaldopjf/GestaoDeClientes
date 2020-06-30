@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { isNullOrUndefined } from 'util';
+import * as xlsx from 'xlsx';
 
 import { Occupation } from 'src/app/models/occupation/occupation';
 import { OccupationService } from 'src/app/services/occupation.service';
@@ -23,6 +24,7 @@ export class OccupationListComponent implements OnInit {
   public dataSource: MatTableDataSource<Occupation>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('epltable', { static: false }) epltable: ElementRef;
 
   public constructor(
     private occupationService: OccupationService,
@@ -131,6 +133,13 @@ export class OccupationListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  public exportToExcel(): void {
+    const ws: xlsx.WorkSheet = xlsx.utils.table_to_sheet(this.epltable.nativeElement);
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+    xlsx.writeFile(wb, 'tabela-de-cargos.xlsx');
   }
 
   public openSnackBar(message: string, action: string): void {

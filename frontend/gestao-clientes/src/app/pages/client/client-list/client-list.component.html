@@ -3,12 +3,13 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Digite algo para filtrar">
 </mat-form-field>
 
-<div class="example-button-container">
+<div class="row">
     <button mat-raised-button color="warn" (click)="createClient()">Adicionar</button>
+    <button mat-raised-button class="btn-success" (click)="exportToExcel()">Exportar para Excel</button>
 </div>
 
-<div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-cell">
+<div class="mat-elevation-z8 table-responsive" #epltable>
+    <table mat-table #epltable [dataSource]="dataSource" matSort class="mat-cell">
 
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
